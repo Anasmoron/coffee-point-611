@@ -1,0 +1,1926 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Кофемашина WCM-230</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --blue:#C6D6E5; --blue-2:#E3ECF5; --blue-3:#F1F6FB; --blue-deep:#6F8DAE;
+  --red:#6B0F0A; --red-2:#8C1912; --red-3:#A8261C; --red-soft:#F4DEDA;
+  --cream:#EFE2CF; --cream-2:#F8F1E7; --cream-3:#FCF8F2;
+  --ink:#2A1714; --muted:#6F5C57; --line:#E2D4C1;
+  --nero:#211B1C; --amber:#F2A93B; --amber-2:#FFD27F; --berry:#9E2A4A;
+  --radius:22px; --shadow:0 10px 30px -12px rgba(75,20,15,.28);
+  --fh:'Unbounded',system-ui,sans-serif; --fb:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--fb);color:var(--ink);background:var(--cream-3);
+  background-image:radial-gradient(900px 500px at 100% -10%, var(--blue-2), transparent 60%),radial-gradient(700px 500px at -10% 30%, #F3E7D6, transparent 60%);
+  background-attachment:fixed;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+h1,h2,h3{font-family:var(--fh);font-weight:600;letter-spacing:-.01em;margin:0}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:rgba(252,248,242,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:14px;height:62px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--fh);font-weight:600;font-size:15px}
+.brand .dot{width:34px;height:34px;border-radius:11px;background:var(--red);display:grid;place-items:center;color:var(--cream);font-size:17px}
+.brand small{display:block;font-family:var(--fb);font-weight:600;font-size:11px;color:var(--muted);letter-spacing:.02em}
+.nav{margin-left:auto;display:flex;gap:6px}
+.nav a{text-decoration:none;font-weight:700;font-size:13px;padding:8px 13px;border-radius:999px;border:1px solid transparent;white-space:nowrap}
+.nav a:hover{background:var(--blue-2)}
+.nav a.no{background:var(--red);color:var(--cream)}
+.nav a.no:hover{background:var(--red-2)}
+.nav a.cur:not(.no){border-color:var(--ink)}
+
+/* ===== DANGER ===== */
+.danger{background:var(--red);color:var(--cream-2);border-radius:32px;padding:38px 36px 34px;margin:26px 0 30px;position:relative;overflow:hidden;box-shadow:0 30px 60px -30px rgba(107,15,10,.7)}
+.danger::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg, rgba(255,255,255,.035) 0 18px, transparent 18px 36px);pointer-events:none}
+.danger > *{position:relative}
+.danger .kicker{display:inline-flex;align-items:center;gap:8px;background:var(--cream);color:var(--red);font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;padding:7px 14px;border-radius:999px}
+.danger h1{font-size:clamp(28px,4.6vw,50px);line-height:1.04;margin:16px 0 10px;color:#fff}
+.danger .lead{max-width:680px;font-size:17px;color:#F3D9CF;margin:0 0 26px}
+.top3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
+.top3 .t{background:var(--cream-2);color:var(--red);border-radius:22px;padding:20px 20px 18px;display:flex;flex-direction:column;gap:8px}
+.top3 .t .em{font-size:34px;line-height:1;position:relative;width:52px;height:52px;display:grid;place-items:center;background:var(--red-soft);border-radius:16px}
+.top3 .t .em::after{content:"";position:absolute;left:6px;right:6px;top:50%;height:4px;background:var(--red-3);border-radius:4px;transform:rotate(-40deg)}
+.top3 .t b{font-family:var(--fh);font-weight:600;font-size:17px;line-height:1.25;color:var(--red)}
+.top3 .t span{font-size:14px;color:#7B3A33}
+.dgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.dcard{background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.14);border-radius:22px;padding:18px 18px 10px}
+.dcard h3{display:flex;align-items:center;gap:10px;font-size:15px;color:#fff;margin-bottom:10px}
+.dcard h3 i{font-style:normal;font-size:22px;width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.12);display:grid;place-items:center}
+.dcard ul{list-style:none;margin:0;padding:0}
+.dcard li{display:flex;gap:10px;padding:8px 0;border-top:1px dashed rgba(255,255,255,.16);font-size:14.5px;color:#F7E5DC}
+.dcard li::before{content:"✕";flex:none;width:20px;height:20px;border-radius:50%;background:var(--cream);color:var(--red);font-weight:800;font-size:11px;display:grid;place-items:center;margin-top:1px}
+.danger .go{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:13px 22px;font-weight:800;font-size:15px;text-decoration:none;transition:transform .15s, box-shadow .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn.cream{background:var(--cream);color:var(--red)}
+.btn.ghost{background:transparent;border:1.5px solid rgba(255,255,255,.4);color:#fff}
+.btn.red{background:var(--red);color:var(--cream)}
+.btn.line{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
+.btn.sm{padding:9px 15px;font-size:13.5px}
+
+/* ===== HOME ===== */
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:26px;align-items:center;padding:34px 0 10px}
+.hero h1{font-size:clamp(28px,4vw,44px);line-height:1.08}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero p{color:var(--muted);font-size:16.5px;max-width:560px}
+.swatches{display:flex;gap:8px;margin-top:14px}
+.swatches span{width:30px;height:30px;border-radius:9px;border:1px solid rgba(0,0,0,.06)}
+.hero .fig-mini{background:linear-gradient(160deg,var(--blue) 0%,var(--blue-2) 100%);border-radius:30px;padding:16px;box-shadow:var(--shadow)}
+.alertbar{display:flex;align-items:center;gap:14px;background:var(--red);color:var(--cream);border-radius:20px;padding:14px 18px;text-decoration:none;margin:18px 0 6px}
+.alertbar b{font-family:var(--fh);font-weight:600}
+.alertbar span{opacity:.8;font-size:14px}
+.alertbar .arr{margin-left:auto;background:var(--cream);color:var(--red);border-radius:999px;padding:6px 12px;font-weight:800;font-size:13px;white-space:nowrap}
+.sect{margin:34px 0 14px;display:flex;align-items:baseline;gap:12px}
+.sect h2{font-size:20px}
+.sect span{color:var(--muted);font-size:14px}
+.main4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.tile{display:flex;align-items:center;gap:14px;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;box-shadow:0 2px 0 rgba(0,0,0,.02);transition:transform .15s, box-shadow .15s, border-color .15s;position:relative}
+.tile:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--blue-deep)}
+.tile .ic{flex:none;width:58px;height:58px;border-radius:17px;background:var(--blue-2);display:grid;place-items:center}
+.tile .ic svg{width:46px;height:46px}
+.tile b{display:block;font-weight:800;font-size:15.5px;line-height:1.25}
+.tile small{display:block;color:var(--muted);font-size:13px;line-height:1.35;margin-top:3px}
+.tile .go{margin-left:auto;font-weight:800;color:var(--red);opacity:.0;transition:opacity .15s}
+.tile:hover .go{opacity:1}
+.main4 .tile{flex-direction:column;align-items:flex-start;padding:20px;min-height:200px;border:0;color:var(--cream-2)}
+.main4 .tile .ic{width:76px;height:76px;border-radius:22px;background:rgba(255,255,255,.9)}
+.main4 .tile .ic svg{width:60px;height:60px}
+.main4 .tile b{font-family:var(--fh);font-weight:600;font-size:18px;margin-top:auto;color:inherit}
+.main4 .tile small{color:inherit;opacity:.85}
+.main4 .tile .num{position:absolute;top:16px;right:18px;font-family:var(--fh);font-size:13px;opacity:.7}
+.main4 .tile:nth-child(1){background:var(--red)}
+.main4 .tile:nth-child(2){background:#4A2A22}
+.main4 .tile:nth-child(3){background:var(--blue);color:var(--ink)}
+.main4 .tile:nth-child(4){background:var(--cream);color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.grid .tile .ic{background:var(--cream-2)}
+.grp-blue .tile .ic{background:var(--blue-2)}
+.grp-red .tile .ic{background:var(--red-soft)}
+
+/* ===== SCENARIO ===== */
+.crumbs{display:flex;align-items:center;gap:10px;margin:22px 0 12px;flex-wrap:wrap}
+.back{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:800;font-size:14px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 14px}
+.back:hover{border-color:var(--ink)}
+.shead{display:flex;align-items:center;gap:18px;margin-bottom:16px}
+.shead .ic{flex:none;width:72px;height:72px;border-radius:22px;background:#fff;display:grid;place-items:center;border:1px solid var(--line)}
+.shead .ic svg{width:56px;height:56px}
+.shead h1{font-size:clamp(24px,3.2vw,34px);line-height:1.1}
+.shead p{margin:6px 0 0;color:var(--muted)}
+.variants{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 16px}
+.variants a{text-decoration:none;font-weight:800;font-size:14px;padding:9px 16px;border-radius:999px;background:#fff;border:1.5px solid var(--line);display:inline-flex;gap:8px;align-items:center}
+.variants a.on{background:var(--red);border-color:var(--red);color:var(--cream)}
+.warnbox{display:flex;gap:12px;align-items:flex-start;background:var(--red-soft);border:1.5px solid #E7B9B1;color:#5A100B;border-radius:18px;padding:12px 16px;margin:0 0 16px;font-size:14.5px}
+.warnbox b{color:var(--red)}
+.warnbox .wi{flex:none;width:26px;height:26px;border-radius:8px;background:var(--red);color:var(--cream);display:grid;place-items:center;font-weight:800}
+.intro{margin:0 0 18px}
+.splay{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:22px;align-items:start}
+.stage{position:sticky;top:78px;background:linear-gradient(165deg,var(--blue) 0%, var(--blue-2) 70%);border-radius:30px;padding:16px;box-shadow:var(--shadow)}
+.stage .vt{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px 6px 10px;font-weight:800;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#3E5872}
+.stage .vt .cnt{background:#fff;border-radius:999px;padding:4px 10px;color:var(--ink);letter-spacing:0}
+.figbox{background:var(--cream-3);border-radius:22px;overflow:hidden;display:grid;place-items:center;min-height:200px}
+.figbox svg{display:block;width:100%;height:auto}
+.cap{background:#fff;border-radius:18px;margin-top:12px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start}
+.cap .n{flex:none;width:34px;height:34px;border-radius:12px;background:var(--red);color:var(--cream);font-family:var(--fh);font-weight:600;display:grid;place-items:center}
+.cap p{margin:0;font-weight:600;font-size:15.5px}
+.cap .sub{display:block;font-weight:500;color:var(--muted);font-size:13.5px;margin-top:4px}
+.ctrl{display:flex;gap:10px;margin-top:12px}
+.ctrl button{flex:1;border:0;border-radius:16px;padding:13px;font-weight:800;font-size:15px;background:#fff}
+.ctrl button.nx{background:var(--red);color:var(--cream)}
+.ctrl button:disabled{opacity:.4;cursor:default}
+.steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.steps li{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:12px 14px;cursor:pointer;transition:border-color .15s, background .15s}
+.steps li:hover{border-color:var(--blue-deep)}
+.steps li .n{flex:none;width:30px;height:30px;border-radius:10px;background:var(--cream);font-weight:800;display:grid;place-items:center;font-size:14px}
+.steps li.on{border-color:var(--red);background:#FFF9F6;box-shadow:0 8px 20px -14px rgba(107,15,10,.6)}
+.steps li.on .n{background:var(--red);color:var(--cream)}
+.steps li.done .n{background:var(--blue);color:var(--ink)}
+.steps li p{margin:3px 0 0;font-size:14.5px}
+.steps li .w{display:block;margin-top:6px;font-size:13px;color:var(--red-3);font-weight:700}
+.steps li .tp{display:block;margin-top:6px;font-size:13px;color:#3E5872;font-weight:600}
+.related{margin:30px 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;text-decoration:none;background:#fff;border:1.5px solid var(--line);border-radius:999px;padding:6px 14px 6px 6px;font-weight:700;font-size:13.5px}
+.chip .ci{width:30px;height:30px;border-radius:50%;background:var(--cream-2);display:grid;place-items:center}
+.chip .ci svg{width:24px;height:24px}
+.chip:hover{border-color:var(--ink)}
+.when{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.when a{text-decoration:none;background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.when a:hover{border-color:var(--red)}
+.when .ic{flex:none;width:44px;height:44px;border-radius:13px;background:var(--cream-2);display:grid;place-items:center}
+.when .ic svg{width:34px;height:34px}
+.when b{display:block;font-size:14px}
+.when small{display:block;font-size:12.5px;color:var(--red-3);font-weight:700}
+
+/* SVG figure styling */
+.pn-bg{fill:var(--nero)}
+.pn .hit{fill:transparent}
+.pn .ico{color:var(--cream)}
+.pn text{fill:#E9DCCB;font:700 12.5px var(--fb);letter-spacing:.03em}
+.pnsvg .finger{font-size:34px}
+.pn{transition:opacity .25s;cursor:help}
+.pn.off{opacity:.18}
+.pn.blink{animation:blink 1s steps(2,start) infinite}
+@keyframes blink{50%{opacity:.15}}
+.pn .dash{fill:#5a4f50}
+.pn .dash.lv{fill:var(--cream)}
+.pn.chase{animation:chase 1.6s infinite}
+@keyframes chase{0%,100%{opacity:.18}10%,25%{opacity:1}}
+.ring{fill:none;stroke:var(--amber);stroke-width:4;transform-box:fill-box;transform-origin:center;animation:pulse 1.4s ease-out infinite}
+.ring2{fill:rgba(242,169,59,.18);stroke:var(--amber);stroke-width:2.5}
+@keyframes pulse{0%{transform:scale(.92);opacity:1}100%{transform:scale(1.35);opacity:0}}
+.tag rect{fill:var(--amber)}
+.tag text{fill:#2A1714;font:800 12.5px var(--fb)}
+.tag.dark rect{fill:var(--red)}
+.tag.dark text{fill:var(--cream)}
+.finger{font-size:26px;animation:tap 1s ease-in-out infinite}
+.finger.hold{animation:none}
+@keyframes tap{0%,100%{transform:translate(0,0)}50%{transform:translate(-3px,-5px)}}
+.mv .opt{display:none}
+.mv .opt.show{display:inline}
+.mv .gone{display:none}
+.mv .part{transition:opacity .3s}
+.mv .hl > *{stroke:var(--amber)!important;stroke-width:4px}
+.mv .hl{filter:drop-shadow(0 0 6px rgba(242,169,59,.95));animation:glow 1.3s ease-in-out infinite}
+@keyframes glow{50%{filter:drop-shadow(0 0 1px rgba(242,169,59,.3))}}
+.mv .dim{opacity:.55}
+.fx{display:none}
+.fx.show{display:inline}
+.stream{stroke-width:5;stroke-linecap:round;stroke-dasharray:6 7;animation:flow .5s linear infinite}
+.stream.coffee{stroke:#6B3A22}
+.stream.water{stroke:#7FB3E0}
+@keyframes flow{to{stroke-dashoffset:-13}}
+.puff{fill:#fff;opacity:.85;animation:puff 1.6s ease-out infinite;transform-box:fill-box;transform-origin:center}
+.puff:nth-child(2){animation-delay:.5s}.puff:nth-child(3){animation-delay:1s}
+@keyframes puff{0%{transform:translate(0,0) scale(.5);opacity:.9}100%{transform:translate(0,-60px) scale(1.6);opacity:0}}
+.arrowfx{fill:none;stroke:var(--amber);stroke-width:6;stroke-linecap:round}
+.spin-cw{animation:spcw 3s linear infinite;transform-origin:230px 200px}
+.spin-ccw{animation:spccw 3s linear infinite;transform-origin:230px 200px}
+@keyframes spcw{to{transform:rotate(360deg)}}
+@keyframes spccw{to{transform:rotate(-360deg)}}
+.lbl{font:700 11px var(--fb);fill:var(--muted)}
+
+/* errors page */
+.errgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px;margin-top:16px}
+.err{background:#fff;border:1.5px solid var(--line);border-radius:20px;padding:14px 16px}
+.err.hide{display:none}
+.err .sym{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:800;font-size:15px}
+.err .ii{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:10px;background:var(--nero)}
+.err .ii svg{width:26px;height:26px}
+.err .ii.bl{animation:blink 1s steps(2,start) infinite}
+.err dl{margin:10px 0 0;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;font-size:14px}
+.err dt{color:var(--muted);font-weight:700}
+.err dd{margin:0}
+.err a.more{display:inline-block;margin-top:10px;font-weight:800;color:var(--red);font-size:13.5px}
+.filterinfo{display:flex;align-items:center;gap:10px;margin-top:12px;font-weight:700}
+.legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:6px 18px;margin:16px 0 0;padding:0;list-style:none;font-size:14px}
+.legend li{display:flex;gap:10px;align-items:center;cursor:pointer;border-radius:12px;padding:5px 8px}
+.legend li:hover,.legend li.on{background:#fff}
+.legend li .k{flex:none;width:26px;height:26px;border-radius:8px;background:var(--red);color:var(--cream);font-weight:800;font-size:12px;display:grid;place-items:center}
+.spec{width:100%;border-collapse:collapse;font-size:14px;background:#fff;border-radius:18px;overflow:hidden}
+.spec td{padding:9px 14px;border-bottom:1px solid var(--line)}
+.spec td:first-child{color:var(--muted)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tabs button{border:1.5px solid rgba(0,0,0,.08);background:#fff;border-radius:999px;padding:7px 14px;font-weight:800;font-size:13px}
+.tabs button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ===== SERVICE ===== */
+.service{margin:40px 0 30px;background:var(--blue);border-radius:34px;padding:26px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.service::after{content:"";position:absolute;right:-80px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle, rgba(255,255,255,.55), transparent 70%);pointer-events:none}
+.svhead{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-bottom:16px;position:relative;z-index:1}
+.svhead h2{font-size:24px;display:flex;align-items:center;gap:12px}
+.svhead h2 i{font-style:normal;width:46px;height:46px;border-radius:14px;background:var(--red);display:grid;place-items:center;font-size:22px}
+.svhead p{margin:0;color:#34506B;font-size:14px;flex-basis:100%}
+.svhead .acts{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.svbody{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:18px;position:relative;z-index:1}
+.panelw{background:var(--cream-3);border-radius:24px;padding:16px}
+.calnav{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.calnav h3{font-size:18px;text-transform:capitalize}
+.calnav .sp{flex:1}
+.ibtn{width:38px;height:38px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-weight:800;font-size:16px;display:grid;place-items:center}
+.ibtn:hover{border-color:var(--ink)}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+.cal .wd{font-size:11.5px;font-weight:800;color:var(--muted);text-align:center;padding:2px 0 4px;text-transform:uppercase;letter-spacing:.06em}
+.cal .d{min-height:86px;background:#fff;border:1.5px solid transparent;border-radius:14px;padding:5px 5px 6px;cursor:pointer;display:flex;flex-direction:column;gap:3px;text-align:left;transition:border-color .15s}
+.cal .d:hover{border-color:var(--blue-deep)}
+.cal .d.out{background:transparent;opacity:.45}
+.cal .d.today{border-color:var(--red)}
+.cal .d.today .dn{background:var(--red);color:var(--cream)}
+.cal .d.we .dn{color:var(--red-3)}
+.cal .dn{font-weight:800;font-size:12.5px;width:24px;height:24px;border-radius:8px;display:grid;place-items:center}
+.pill{display:flex;align-items:center;gap:4px;border-radius:8px;padding:2px 5px;font-size:11px;font-weight:700;color:#2A1714;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35}
+.pill.done{opacity:.55;text-decoration:line-through}
+.pill .e{flex:none}
+.more{font-size:11px;font-weight:800;color:var(--muted);padding-left:4px}
+.people{display:flex;flex-wrap:wrap;gap:8px}
+.pchip{display:inline-flex;align-items:center;gap:7px;border:0;border-radius:999px;padding:5px 12px 5px 5px;font-weight:800;font-size:13.5px;color:#2A1714}
+.pchip .e{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.7);display:grid;place-items:center;font-size:16px}
+.pchip .c{opacity:.65;font-weight:700}
+.side h4{margin:0 0 10px;font-family:var(--fh);font-weight:600;font-size:15px}
+.side .blk{background:var(--cream-3);border-radius:24px;padding:16px;margin-bottom:14px}
+.up{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.up li{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:8px 10px;cursor:pointer;font-size:13.5px}
+.up li .dt{flex:none;font-weight:800;width:56px;font-size:12.5px;color:var(--muted)}
+.up li.over .dt{color:var(--red-3)}
+.up li .who{flex:none;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-size:16px}
+.up li b{display:block;font-size:13.5px;line-height:1.25}
+.up li small{color:var(--muted)}
+.reg{list-style:none;padding:0;margin:0;font-size:13px;display:flex;flex-direction:column;gap:6px}
+.reg li{display:flex;gap:8px}
+.reg li b{flex:none;min-width:116px;color:var(--red)}
+.empty{color:var(--muted);font-size:13.5px}
+
+dialog{border:0;border-radius:28px;padding:0;max-width:560px;width:calc(100% - 32px);box-shadow:0 40px 80px -20px rgba(42,23,20,.5);color:var(--ink);background:var(--cream-3)}
+dialog::backdrop{background:rgba(42,23,20,.45);backdrop-filter:blur(3px)}
+.dlg{padding:22px 22px 20px}
+.dlg h3{font-size:19px;margin-bottom:4px}
+.dlg .x{float:right;width:36px;height:36px;border-radius:12px;border:0;background:#fff;font-size:18px}
+.dlg .subt{color:var(--muted);font-size:13.5px;margin:0 0 14px}
+.field{margin:12px 0}
+.field > label{display:block;font-weight:800;font-size:13px;margin-bottom:6px}
+.inp, select.inp, textarea.inp{width:100%;font:inherit;font-size:15px;padding:11px 13px;border-radius:14px;border:1.5px solid var(--line);background:#fff;color:var(--ink)}
+.inp:focus{outline:2px solid var(--blue-deep);outline-offset:1px}
+.colors{display:flex;flex-wrap:wrap;gap:7px}
+.sw{width:36px;height:36px;border-radius:12px;border:2px solid rgba(0,0,0,.08);position:relative;font-size:13px;display:grid;place-items:center}
+.sw.sel{outline:3px solid var(--ink);outline-offset:2px}
+.sw:disabled{cursor:not-allowed;opacity:.9}
+.sw:disabled::after{content:"";position:absolute;inset:0;border-radius:10px;background:repeating-linear-gradient(-45deg, rgba(255,255,255,.65) 0 4px, transparent 4px 8px)}
+.hexrow{display:flex;gap:8px;align-items:center;margin-top:9px}
+.hexrow .inp{max-width:150px;font-family:ui-monospace,Menlo,monospace}
+.hexrow input[type=color]{width:44px;height:44px;border:0;padding:0;background:none;border-radius:12px}
+.hexrow .pv{width:44px;height:44px;border-radius:12px;border:1.5px solid var(--line)}
+.msg{font-size:12.5px;font-weight:700;color:var(--red-3);min-height:16px;margin-top:5px}
+.emojis{display:grid;grid-template-columns:repeat(auto-fill,minmax(40px,1fr));gap:5px}
+.em{height:40px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font-size:20px;display:grid;place-items:center}
+.em.sel{border-color:var(--ink);background:var(--blue-2)}
+.em:disabled{opacity:.25;cursor:not-allowed;filter:grayscale(1)}
+.newp{background:#fff;border-radius:18px;padding:12px 14px;border:1.5px dashed var(--blue-deep);margin-top:10px}
+.dentry{display:flex;align-items:center;gap:10px;background:#fff;border-radius:14px;padding:8px 10px;margin-bottom:6px}
+.dentry .who{flex:none;width:34px;height:34px;border-radius:11px;display:grid;place-items:center;font-size:18px}
+.dentry .tx{flex:1;min-width:0;font-size:13.5px}
+.dentry .tx b{display:block}
+.dentry .tx a{color:var(--red);font-weight:800;font-size:12.5px}
+.dentry input{width:20px;height:20px;accent-color:var(--red)}
+.dentry .del{border:0;background:var(--red-soft);color:var(--red);width:30px;height:30px;border-radius:10px;font-weight:800}
+.dfoot{display:flex;gap:10px;justify-content:flex-end;margin-top:16px;flex-wrap:wrap}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#fff;border-radius:999px;padding:10px 18px;font-weight:700;font-size:14px;opacity:0;transition:.25s;z-index:100;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--cream-3)}
+.svstat{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:12.5px;background:rgba(255,255,255,.7);border-radius:999px;padding:4px 11px;margin-top:6px;color:#34506B}
+.svstat.warn{color:var(--red-3)}
+/* auth + coffee */
+.svauth{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:rgba(255,255,255,.75);border-radius:16px;padding:8px 12px;font-size:13.5px;font-weight:700;color:#34506B;flex-basis:100%}
+.svauth img{width:28px;height:28px;border-radius:50%;flex:none}
+.svauth.ro{background:var(--red-soft);color:var(--red)}
+.rob{background:var(--red-soft);color:var(--red);border-radius:14px;padding:10px 12px;font-weight:700;font-size:13.5px;margin:14px 0 0}
+.okb{flex:none;font-size:12px;font-weight:800;color:#2f6b3a;background:#d9f2dc;border-radius:999px;padding:3px 9px}
+.byline{color:var(--muted);font-size:12px}
+.coffee{position:relative;z-index:1;margin-top:18px;background:var(--cream-3);border-radius:24px;padding:16px}
+.cfhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.cfhead h3{font-size:18px}
+.cfhead span{color:var(--muted);font-size:13.5px}
+.cfhead .btn{margin-left:auto}
+.cfgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.cf{background:#fff;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;border:1.5px solid var(--line)}
+.cf .ph{aspect-ratio:4/3;background:var(--cream-2);display:grid;place-items:center;overflow:hidden;max-width:100%}
+.cf .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.cf .noimg{font-size:44px;opacity:.5}
+.cf .cb{padding:12px 14px 14px;display:flex;flex-direction:column;gap:8px;flex:1}
+.cf .cb > b{font-size:15.5px;line-height:1.25}
+.gr{display:flex;align-items:center;gap:10px;background:var(--nero);color:var(--cream);border-radius:14px;padding:8px 10px}
+.gr svg{width:44px;height:44px;flex:none}
+.gr em{font-style:normal;font-family:var(--fh);font-size:22px;font-weight:600;color:var(--amber)}
+.gr small{color:#cdbfae;font-size:12px}
+.cf p{margin:0;font-size:13.5px;color:var(--ink)}
+.cf .acts{display:flex;gap:6px;margin-top:auto;padding-top:4px}
+.cfempty{background:#fff;border:1.5px dashed var(--blue-deep);border-radius:18px;padding:18px;color:var(--muted);font-size:14px}
+.phpick{display:flex;gap:12px;align-items:center}
+.phpick .pv2{width:96px;height:72px;border-radius:14px;background:var(--cream-2);border:1.5px solid var(--line);overflow:hidden;display:grid;place-items:center;flex:none;font-size:28px}
+.phpick .pv2 img{width:100%;height:100%;object-fit:cover}
+.grrow{display:flex;align-items:center;gap:14px}
+.grrow input[type=range]{flex:1;accent-color:var(--red)}
+.grrow .gbig{min-width:96px;text-align:center;background:var(--nero);color:var(--amber);border-radius:14px;padding:6px 8px;font-family:var(--fh);font-size:22px}
+.grrow .gbig small{display:block;font-family:var(--fb);font-size:11.5px;color:#cdbfae}
+footer{color:var(--muted);font-size:12.5px;text-align:center;padding:30px 0 40px}
+
+@media (max-width:980px){
+  .main4{grid-template-columns:repeat(2,1fr)}
+  .splay{grid-template-columns:1fr}
+  .stage{position:relative;top:0}
+  .svbody{grid-template-columns:1fr}
+  .hero{grid-template-columns:1fr}
+  .top3{grid-template-columns:1fr}
+}
+@media (max-width:620px){
+  .wrap{padding:0 16px}
+  .brand small{display:none}
+  .nav a{padding:7px 10px;font-size:12px}
+  .nav a .lt{display:none}
+  .danger{padding:26px 18px;border-radius:24px}
+  .dgrid{grid-template-columns:1fr}
+  .main4 .tile{min-height:170px;padding:16px}
+  .main4 .tile b{font-size:15.5px}
+  .main4 .tile .ic{width:60px;height:60px}
+  .main4 .tile .ic svg{width:46px;height:46px}
+  .service{padding:16px;border-radius:26px}
+  .panelw{padding:10px}
+  .cal{gap:3px}
+  .cal .d{min-height:62px;padding:3px;border-radius:10px}
+  .pill{font-size:0;padding:2px;justify-content:center}
+  .pill .e{font-size:12px}
+  .cal .wd{font-size:10px;letter-spacing:0}
+  .errgrid{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+}
+/* ---- version switch ---- */
+.mode{display:flex;background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px;gap:2px;margin-left:6px;flex:none}
+.mode button{border:0;background:transparent;border-radius:999px;padding:5px 9px;font-size:15px;line-height:1}
+.mode button.on{background:var(--ink)}
+.mode button:focus-visible,.tabbar a:focus-visible{outline:2px solid var(--blue-deep);outline-offset:2px}
+.tabbar{display:none}
+/* ---- MOBILE version ---- */
+body.mob .wrap{max-width:480px}
+body.mob{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+body.mob.scen{padding-bottom:calc(150px + env(safe-area-inset-bottom,0px))}
+body.mob .nav{display:none}
+body.mob .mode{margin-left:auto}
+body.mob .brand small{display:none}
+body.mob .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:35;background:rgba(252,248,242,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px));justify-content:center;gap:4px}
+.tabbar a{flex:1;max-width:110px;display:flex;flex-direction:column;align-items:center;gap:1px;text-decoration:none;font-size:11.5px;font-weight:800;color:var(--muted);padding:6px 0;border-radius:14px}
+.tabbar a i{font-style:normal;font-size:21px;line-height:1.1}
+.tabbar a.cur{color:var(--red);background:var(--red-soft)}
+body.mob .hero{grid-template-columns:1fr;padding-top:18px;gap:14px}
+body.mob .hero h1{font-size:28px}
+body.mob .hero p{font-size:15px}
+body.mob .main4{grid-template-columns:1fr 1fr;gap:10px}
+body.mob .main4 .tile{min-height:160px;padding:14px}
+body.mob .main4 .tile b{font-size:15px}
+body.mob .main4 .tile .ic{width:56px;height:56px;border-radius:17px}
+body.mob .main4 .tile .ic svg{width:44px;height:44px}
+body.mob .grid,body.mob .when,body.mob .errgrid,body.mob .legend{grid-template-columns:1fr}
+body.mob .top3,body.mob .dgrid{grid-template-columns:1fr}
+body.mob .danger{padding:24px 18px;border-radius:24px}
+body.mob .danger h1{font-size:30px}
+body.mob .splay{grid-template-columns:1fr}
+body.mob .stage{position:relative;top:0;padding:12px;border-radius:24px}
+body.mob .shead .ic{width:56px;height:56px}
+body.mob .shead .ic svg{width:44px;height:44px}
+body.mob .shead h1{font-size:23px}
+body.mob .ctrl{position:fixed;z-index:34;left:50%;transform:translateX(-50%);width:min(480px,100%);bottom:calc(66px + env(safe-area-inset-bottom,0px));margin:0;padding:10px 16px 8px;background:linear-gradient(to bottom,rgba(252,248,242,0),var(--cream-3) 35%)}
+body.mob .ctrl button{padding:15px;font-size:16px;box-shadow:0 6px 18px -10px rgba(42,23,20,.5)}
+body.mob .swipehint{display:block}
+.swipehint{display:none;text-align:center;font-size:12px;font-weight:700;color:#34506B;margin-top:8px}
+body.mob .svbody{grid-template-columns:1fr}
+body.mob .service{padding:14px;border-radius:24px}
+body.mob .svhead h2{font-size:20px}
+body.mob .panelw{padding:10px}
+body.mob .cal{gap:3px}
+body.mob .cal .d{min-height:58px;padding:3px;border-radius:10px}
+body.mob .pill{font-size:0;padding:2px;justify-content:center}
+body.mob .pill .e{font-size:12px}
+body.mob .cal .wd{font-size:10px;letter-spacing:0}
+body.mob .cfgrid{grid-auto-flow:column;grid-template-columns:none;grid-auto-columns:80%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+body.mob .cf{scroll-snap-align:start}
+body.mob dialog{margin:auto 0 0;width:100%;max-width:100%;max-height:92vh;border-radius:28px 28px 0 0;padding-bottom:env(safe-area-inset-bottom,0px)}
+body.mob .svauth .btn{flex:1}
+@media (prefers-reduced-motion:reduce){*{animation-duration:0s!important;animation-iteration-count:1!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#home"><span class="dot">☕</span><span>WCM-230<small>ColorTouch Cappuccino Nero</small></span></a>
+    <nav class="nav">
+      <a href="#danger" class="no" data-r="danger">⛔ <span class="lt">Нельзя</span></a>
+      <a href="#home" data-r="home">Разделы</a>
+      <a href="#service" data-r="service">🛠 <span class="lt">Тех-обслуживание</span></a>
+    </nav>
+    <div class="mode" role="group" aria-label="Версия страницы"><button type="button" data-m="mob" title="Мобильная версия" aria-label="Мобильная версия">📱</button><button type="button" data-m="desk" title="Версия для компьютера" aria-label="Версия для компьютера">🖥</button></div>
+  </div>
+</header>
+<nav class="tabbar" aria-label="Разделы"><a href="#danger" data-r="danger"><i>⛔</i>Нельзя</a><a href="#home" data-r="home"><i>📖</i>Схемы</a><a href="#service" data-r="service"><i>🛠</i>ТО</a><a href="#coffee" data-r="coffee"><i>☕</i>Кофе</a></nav>
+<main id="app" class="wrap"></main>
+<footer class="wrap">Схемы составлены по «Руководству по эксплуатации» кофемашины Weissgauff WCM-230 ColorTouch Cappuccino Nero. При неисправности — авторизованный сервисный центр.</footer>
+<dialog id="dlg"></dialog>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   helpers
+   ============================================================ */
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const NS = 'http://www.w3.org/2000/svg';
+function toast(t){const el=$('#toast');el.textContent=t;el.classList.add('on');clearTimeout(toast._t);toast._t=setTimeout(()=>el.classList.remove('on'),1900)}
+
+/* ============================================================
+   Mini-pictures (button icons)
+   ============================================================ */
+const C = {red:'#6B0F0A',red2:'#A8261C',blue:'#C6D6E5',bd:'#6F8DAE',cream:'#EFE2CF',ink:'#2A1714',nero:'#211B1C',amber:'#F2A93B',coffee:'#5B321F',milk:'#FFFBF3'};
+const MI = {
+  power:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="19" fill="${C.red}"/><path d="M17 15.5a11 11 0 1 0 14 0" fill="none" stroke="${C.cream}" stroke-width="3.4" stroke-linecap="round"/><path d="M24 11v12" stroke="${C.cream}" stroke-width="3.4" stroke-linecap="round"/></svg>`,
+  drinks:`<svg viewBox="0 0 48 48"><path d="M8 18h26v10a10 10 0 0 1-10 10h-6A10 10 0 0 1 8 28z" fill="${C.cream}" stroke="${C.ink}" stroke-width="2.2"/><path d="M10 18h22" stroke="${C.coffee}" stroke-width="5"/><path d="M34 21a5 5 0 0 1 0 10" fill="none" stroke="${C.ink}" stroke-width="2.4"/><path d="M5 42h36" stroke="${C.ink}" stroke-width="2.4" stroke-linecap="round"/><path d="M16 6c-2 3 2 4 0 8M24 6c-2 3 2 4 0 8" stroke="${C.red2}" stroke-width="2.2" fill="none" stroke-linecap="round"/></svg>`,
+  milk:`<svg viewBox="0 0 48 48"><path d="M12 14h22l-2 28H14z" fill="#D9D2CC" stroke="${C.ink}" stroke-width="2.2"/><path d="M34 18c6 0 6 10 0 10" fill="none" stroke="${C.ink}" stroke-width="2.2"/><path d="M13.3 22h20.4l-1.5 20H14.8z" fill="${C.milk}"/><circle cx="18" cy="21" r="3.5" fill="#fff" stroke="${C.bd}" stroke-width="1.4"/><circle cx="24" cy="19" r="4" fill="#fff" stroke="${C.bd}" stroke-width="1.4"/><circle cx="30" cy="21" r="3" fill="#fff" stroke="${C.bd}" stroke-width="1.4"/><path d="M26 2v18" stroke="#9a908a" stroke-width="3.5" stroke-linecap="round"/></svg>`,
+  clean:`<svg viewBox="0 0 48 48"><path d="M24 6c7 10 12 15 12 22a12 12 0 0 1-24 0c0-7 5-12 12-22z" fill="${C.blue}" stroke="${C.bd}" stroke-width="2.2"/><path d="M18 30a6 6 0 0 0 6 6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M39 8l1.6 3.4L44 13l-3.4 1.6L39 18l-1.6-3.4L34 13l3.4-1.6z" fill="${C.amber}"/><path d="M9 6l1 2.2 2.2 1-2.2 1L9 12.4 8 10.2 5.8 9.2 8 8.2z" fill="${C.amber}"/></svg>`,
+  grind:`<svg viewBox="0 0 48 48"><circle cx="24" cy="25" r="17" fill="${C.nero}"/><circle cx="24" cy="25" r="10" fill="#4a4042"/><path d="M24 25 L24 15" stroke="${C.amber}" stroke-width="3" stroke-linecap="round"/><g fill="${C.cream}">${Array.from({length:9},(_,i)=>{const a=(-120+i*30)*Math.PI/180;return `<circle cx="${(24+14*Math.sin(a)).toFixed(1)}" cy="${(25-14*Math.cos(a)).toFixed(1)}" r="1.4"/>`}).join('')}</g><path d="M24 2l-4 6h8z" fill="${C.red}"/></svg>`,
+  settings:`<svg viewBox="0 0 48 48"><rect x="6" y="8" width="36" height="32" rx="9" fill="${C.nero}"/><g stroke-linecap="round" stroke-width="4"><path d="M13 18h6" stroke="${C.cream}"/><path d="M21 18h6" stroke="${C.cream}"/><path d="M29 18h6" stroke="#5a4f50"/><path d="M13 30h6" stroke="${C.amber}"/><path d="M21 30h6" stroke="${C.amber}"/><path d="M29 30h6" stroke="${C.amber}"/></g></svg>`,
+  reset:`<svg viewBox="0 0 48 48"><path d="M36 16a14 14 0 1 0 3 10" fill="none" stroke="${C.red}" stroke-width="4" stroke-linecap="round"/><path d="M38 6v11H27" fill="none" stroke="${C.red}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><text x="24" y="30" text-anchor="middle" font-size="12" font-weight="800" fill="${C.ink}" font-family="Manrope,sans-serif">2</text></svg>`,
+  tray:`<svg viewBox="0 0 48 48"><rect x="5" y="24" width="38" height="14" rx="5" fill="${C.nero}"/><rect x="10" y="19" width="28" height="6" rx="2" fill="#7c7172"/><path d="M14 22h20" stroke="${C.cream}" stroke-width="1.5" stroke-dasharray="3 2"/><path d="M24 4c3 4 5 6 5 9a5 5 0 0 1-10 0c0-3 2-5 5-9z" fill="${C.blue}" stroke="${C.bd}" stroke-width="1.6"/></svg>`,
+  grounds:`<svg viewBox="0 0 48 48"><path d="M8 16h32l-3 24H11z" fill="#4d4445"/><g fill="${C.coffee}"><circle cx="16" cy="22" r="3"/><circle cx="24" cy="20" r="3.4"/><circle cx="32" cy="22" r="3"/><circle cx="20" cy="28" r="3"/><circle cx="28" cy="28" r="3"/><circle cx="24" cy="34" r="3"/></g><rect x="6" y="12" width="36" height="5" rx="2" fill="${C.red}"/></svg>`,
+  brew:`<svg viewBox="0 0 48 48"><rect x="11" y="6" width="26" height="34" rx="7" fill="#8d827c"/><circle cx="24" cy="18" r="7" fill="#5c524e"/><circle cx="24" cy="18" r="3" fill="#3a3233"/><rect x="16" y="29" width="16" height="6" rx="2" fill="#5c524e"/><rect x="7" y="16" width="4" height="12" rx="2" fill="${C.bd}"/><rect x="37" y="16" width="4" height="12" rx="2" fill="${C.bd}"/><path d="M40 38l3 3M8 38l-3 3" stroke="${C.amber}" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+  bracket:`<svg viewBox="0 0 48 48"><rect x="6" y="28" width="36" height="7" rx="3" fill="#5d5354"/><path d="M30 8l10 10-14 14-4-1-1-4z" fill="${C.cream}" stroke="${C.ink}" stroke-width="2"/><path d="M13 20 l8 0" stroke="${C.red}" stroke-width="3" stroke-linecap="round"/><text x="14" y="16" font-size="9" font-weight="800" fill="${C.red}" font-family="Manrope,sans-serif">7д</text></svg>`,
+  grinderq:`<svg viewBox="0 0 48 48"><path d="M8 8h32L28 26v12h-8V26z" fill="${C.nero}"/><g fill="${C.coffee}"><ellipse cx="18" cy="13" rx="3" ry="2"/><ellipse cx="25" cy="13" rx="3" ry="2"/><ellipse cx="31" cy="13" rx="3" ry="2"/></g><path d="M36 30a8 8 0 1 1-4-6" fill="none" stroke="${C.amber}" stroke-width="3" stroke-linecap="round"/><text x="34" y="44" font-size="8" font-weight="800" fill="${C.red}" font-family="Manrope,sans-serif">15с</text></svg>`,
+  grinderf:`<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="17" fill="#6d635e"/><circle cx="24" cy="24" r="10" fill="${C.nero}"/>${Array.from({length:12},(_,i)=>{const a=i*30*Math.PI/180;return `<path d="M${(24+11*Math.cos(a)).toFixed(1)} ${(24+11*Math.sin(a)).toFixed(1)}L${(24+16*Math.cos(a)).toFixed(1)} ${(24+16*Math.sin(a)).toFixed(1)}" stroke="${C.cream}" stroke-width="2"/>`}).join('')}<path d="M34 40l8-8M38 44l6-6" stroke="${C.amber}" stroke-width="3" stroke-linecap="round"/></svg>`,
+  descale:`<svg viewBox="0 0 48 48"><path d="M20 6c6 9 10 13 10 19a10 10 0 0 1-20 0c0-6 4-10 10-19z" fill="${C.blue}" stroke="${C.bd}" stroke-width="2"/><circle cx="34" cy="32" r="10" fill="#F6D86B" stroke="#C9A93A" stroke-width="2"/><path d="M34 22v20M24 32h20M27 25l14 14M41 25 27 39" stroke="#C9A93A" stroke-width="1.2"/><text x="14" y="30" font-size="8" font-weight="800" fill="${C.ink}" font-family="Manrope,sans-serif">3%</text></svg>`,
+  wand:`<svg viewBox="0 0 48 48"><rect x="20" y="3" width="10" height="9" rx="2" fill="#4a4042"/><rect x="22.5" y="11" width="5" height="22" rx="2" fill="#b8b0aa"/><rect x="21" y="31" width="8" height="10" rx="3" fill="#E9E3DD" stroke="${C.ink}" stroke-width="1.4"/><path d="M8 20c0-4 6-4 6 0s6 4 6 0" stroke="${C.bd}" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M33 42h10M38 37v10" stroke="${C.red}" stroke-width="2.6" stroke-linecap="round"/></svg>`,
+  water:`<svg viewBox="0 0 48 48"><path d="M13 10h22l-3 30H16z" fill="#fff" stroke="${C.ink}" stroke-width="2.2"/><path d="M14.6 20h18.8l-2 19H16.6z" fill="${C.blue}"/><path d="M20 4c-2 2 2 3 0 5M28 4c-2 2 2 3 0 5" stroke="${C.red2}" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`,
+  errors:`<svg viewBox="0 0 48 48"><path d="M24 5 44 40H4z" fill="${C.amber}" stroke="${C.ink}" stroke-width="2.4" stroke-linejoin="round"/><path d="M24 17v11" stroke="${C.ink}" stroke-width="3.6" stroke-linecap="round"/><circle cx="24" cy="34" r="2.3" fill="${C.ink}"/></svg>`,
+  sleep:`<svg viewBox="0 0 48 48"><path d="M30 6a17 17 0 1 0 12 26A14 14 0 0 1 30 6z" fill="${C.bd}"/><text x="30" y="20" font-size="10" font-weight="800" fill="${C.red}" font-family="Manrope,sans-serif">z</text><text x="36" y="13" font-size="8" font-weight="800" fill="${C.red}" font-family="Manrope,sans-serif">z</text></svg>`,
+  parts:`<svg viewBox="0 0 48 48"><rect x="8" y="8" width="32" height="34" rx="5" fill="${C.nero}"/><rect x="11" y="11" width="26" height="6" rx="2" fill="#3e3537"/><rect x="17" y="21" width="14" height="12" rx="2" fill="#151213"/><rect x="21" y="21" width="6" height="6" fill="#4a4042"/><rect x="10" y="38" width="28" height="5" rx="2" fill="#4a4042"/><circle cx="40" cy="10" r="7" fill="${C.amber}"/><text x="40" y="13.5" text-anchor="middle" font-size="9" font-weight="800" fill="${C.ink}" font-family="Manrope,sans-serif">i</text></svg>`,
+  storage:`<svg viewBox="0 0 48 48"><path d="M6 18 24 9l18 9v20l-18 8-18-8z" fill="#D8B98F" stroke="${C.ink}" stroke-width="2"/><path d="M6 18l18 9 18-9M24 27v19" stroke="${C.ink}" stroke-width="2" fill="none"/><g stroke="${C.bd}" stroke-width="2.4" stroke-linecap="round"><path d="M37 2v12M31 8h12M33 4l8 8M41 4l-8 8"/></g></svg>`,
+  firstrun:`<svg viewBox="0 0 48 48"><path d="M6 22h36v18a3 3 0 0 1-3 3H9a3 3 0 0 1-3-3z" fill="#D8B98F" stroke="${C.ink}" stroke-width="2"/><path d="M6 22 12 12h24l6 10" fill="#E9D3B2" stroke="${C.ink}" stroke-width="2"/><path d="M21 4l3 5 3-5" stroke="${C.red}" stroke-width="2.4" fill="none"/><path d="M17 31h14" stroke="${C.red}" stroke-width="3" stroke-linecap="round"/></svg>`,
+  service:`<svg viewBox="0 0 48 48"><rect x="6" y="9" width="36" height="33" rx="7" fill="#fff" stroke="${C.ink}" stroke-width="2"/><path d="M6 18h36" stroke="${C.ink}" stroke-width="2"/><rect x="6" y="9" width="36" height="9" rx="4" fill="${C.red}"/><path d="M15 5v8M33 5v8" stroke="${C.ink}" stroke-width="2.6" stroke-linecap="round"/><rect x="12" y="23" width="7" height="6" rx="2" fill="#F8C8DC"/><rect x="21" y="23" width="7" height="6" rx="2" fill="#CAFFBF"/><rect x="30" y="31" width="7" height="6" rx="2" fill="#A0C4FF"/><rect x="12" y="31" width="7" height="6" rx="2" fill="#FFD6A5"/></svg>`,
+};
+
+/* ============================================================
+   Control panel (SVG)
+   ============================================================ */
+const PANEL = {
+  power:     {x:78, y:146, n:1, name:'Вкл / Выкл', kind:'btn'},
+  hotwater:  {x:190,y:70,  n:2, name:'Горячая вода', label:'ГОРЯЧАЯ ВОДА', kind:'btn'},
+  americano: {x:318,y:70,  n:3, name:'Американо', label:'АМЕРИКАНО', kind:'btn'},
+  double:    {x:458,y:70,  n:4, name:'Двойной эспрессо', label:'ДВОЙНОЙ ЭСПРЕССО', kind:'btn'},
+  espresso:  {x:588,y:70,  n:5, name:'Эспрессо', label:'ЭСПРЕССО', kind:'btn'},
+  nobeans:   {x:700,y:70,  n:6, name:'Индикатор «Нет зёрен»', label:'НЕТ ЗЁРЕН', kind:'ind'},
+  brewdirty: {x:755,y:146, n:7, name:'Индикатор «Очистите заварочный механизм»', label:'ОЧИСТИТЕ\nЗАВАР. МЕХАНИЗМ', kind:'ind'},
+  nowater:   {x:812,y:70,  n:8, name:'Индикатор «Нет воды»', label:'НЕТ ВОДЫ', kind:'ind'},
+  steam:     {x:190,y:220, n:9, name:'Молочная пена (подача пара)', label:'МОЛОЧНАЯ ПЕНА', kind:'btn'},
+  clean:     {x:302,y:220, n:10,name:'Очистка (самоочистка)', label:'ОЧИСТКА', kind:'btn'},
+  grindclean:{x:404,y:220, n:11,name:'Очистка кофемолки', label:'ОЧИСТКА\nКОФЕМОЛКИ', kind:'btn'},
+  scaleP:    {x:504,y:150, n:12,name:'Шкала «Порция» (1–3)', kind:'scale'},
+  portion:   {x:504,y:220, n:13,name:'Порция — количество молотого кофе', label:'ПОРЦИЯ', kind:'btn'},
+  scaleV:    {x:612,y:150, n:14,name:'Шкала «Объём» (1–3)', kind:'scale'},
+  volume:    {x:612,y:220, n:15,name:'Объём кофе', label:'ОБЪЁМ', kind:'btn'},
+  caution:   {x:712,y:220, n:16,name:'Индикатор «Осторожно» — системная ошибка / неправильная сборка', label:'ОСТОРОЖНО', kind:'ind'},
+  grounds:   {x:818,y:220, n:17,name:'Индикатор «Очистите осадок» — контейнер для жмыха полон', label:'ОЧИСТИТЕ\nОСАДОК', kind:'ind'},
+};
+const PN_BTNS = ['power','hotwater','americano','double','espresso','steam','clean','grindclean','portion','volume','scaleP','scaleV'];
+const PN_COFFEE = ['power','americano','double','espresso','portion','volume','grindclean','scaleP','scaleV'];
+const LEVEL = {scaleP:2, scaleV:2};
+
+const glass = (top, h, fillTop, fill) => `<path d="M-10 ${top}h20l-2.4 ${h}h-15.2z" fill="${fill}" /><path d="M-10 ${top}h20l-.6 4h-18.8z" fill="${fillTop}"/>`;
+const PICO = {
+  power:`<path d="M-8.5 -9.5A13 13 0 1 0 8.5 -9.5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/><path d="M0 -16v12" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/>`,
+  hotwater:`<g transform="translate(0,-2)">${glass(-15,32,'#ffffff','rgba(255,255,255,.88)')}</g>`,
+  americano:`<g transform="translate(0,-2)">${glass(-17,34,'#9a7058','#4b2a20')}</g>`,
+  double:`<g transform="translate(-8,2)">${glass(-12,24,'#c79a6a','#5b321f')}</g><g transform="translate(9,-3)">${glass(-12,24,'#c79a6a','#5b321f')}</g>`,
+  espresso:`<g transform="translate(0,2)">${glass(-12,22,'#d2a678','#5b321f')}</g>`,
+  nobeans:`<ellipse cx="-5" cy="0" rx="7" ry="11" fill="currentColor" transform="rotate(20 -5 0)"/><path d="M-8 -9c5 5-2 12 2 18" stroke="#211B1C" stroke-width="2" fill="none" transform="rotate(20 -5 0)"/><ellipse cx="9" cy="5" rx="6" ry="4" fill="currentColor"/>`,
+  nowater:`<path d="M-4 -14c5 7 8 11 8 15a8 8 0 0 1-16 0c0-4 3-8 8-15z" fill="none" stroke="currentColor" stroke-width="2.4"/><g fill="currentColor"><circle cx="9" cy="-8" r="1.8"/><circle cx="12" cy="0" r="1.6"/><circle cx="10" cy="8" r="1.4"/></g>`,
+  brewdirty:`<path d="M-6 -12a6 6 0 0 1 12 0v7a6 6 0 0 1-12 0z" fill="currentColor"/><path d="M-11 6c4 6 18 6 22 0" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M0 -14v14" stroke="#211B1C" stroke-width="2"/>`,
+  steam:`<path d="M-12 2h22v5a8 8 0 0 1-8 8h-6a8 8 0 0 1-8-8z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M10 5a4 4 0 0 1 0 7" fill="none" stroke="currentColor" stroke-width="2.2"/><g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M-6 -2c-3-3 3-5 0-9s2-5 0-7"/><path d="M0 -2c-3-3 3-5 0-9s2-5 0-7"/><path d="M6 -2c-3-3 3-5 0-9s2-5 0-7"/></g>`,
+  clean:`<circle r="14" fill="none" stroke="currentColor" stroke-width="2.4"/><g fill="currentColor"><circle cx="-5" cy="-5" r="2.6"/><circle cx="4" cy="-6" r="2.2"/><circle cx="-6" cy="4" r="2.2"/><circle cx="5" cy="4" r="2.8"/><circle cx="0" cy="0" r="1.6"/></g><path d="M10 -14l4 3-4 2" fill="none" stroke="currentColor" stroke-width="2"/>`,
+  grindclean:`<path d="M-12 -14l9 22h6l9-22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><g fill="currentColor"><ellipse cx="-3" cy="-8" rx="2.4" ry="3.2"/><ellipse cx="4" cy="-6" rx="2.4" ry="3.2"/><ellipse cx="0" cy="1" rx="2" ry="2.8"/></g><path d="M0 10v6" stroke="currentColor" stroke-width="2.4"/>`,
+  portion:`<ellipse rx="10" ry="14" fill="currentColor" transform="rotate(30)"/><path d="M-5 -10c7 6-3 12 4 20" stroke="#211B1C" stroke-width="2.4" fill="none" transform="rotate(30)"/>`,
+  volume:`<path d="M-15 -6h22v6a10 10 0 0 1-10 10h-2a10 10 0 0 1-10-10z" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M7 -3a5 5 0 0 1 0 10" fill="none" stroke="currentColor" stroke-width="2.2"/><path d="M-17 14h28" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>`,
+  caution:`<path d="M0 -15 15 12H-15z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M0 -5v8" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/><circle cy="7.5" r="1.7" fill="currentColor"/>`,
+  grounds:`<rect x="-12" y="-13" width="24" height="26" rx="2" fill="none" stroke="currentColor" stroke-width="2.4"/><g fill="currentColor">${[[-6,-6],[0,-7],[6,-6],[-6,0],[1,0],[6,1],[-5,7],[0,6],[6,7],[-3,-3],[3,3]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="1.5"/>`).join('')}</g>`,
+};
+
+function panelSVG(){
+  let s = `<svg viewBox="0 0 900 290" class="pnsvg" role="img" aria-label="Панель управления кофемашины"><rect x="6" y="6" width="888" height="278" rx="46" class="pn-bg"/><rect x="6" y="6" width="888" height="278" rx="46" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="2"/>`;
+  for (const [k,p] of Object.entries(PANEL)){
+    s += `<g class="pn ${p.kind}" data-k="${k}" transform="translate(${p.x},${p.y})"><title>${p.n}. ${esc(p.name)}</title>`;
+    if (p.kind === 'scale'){
+      s += `<rect x="-38" y="-14" width="76" height="28" fill="transparent"/>` + [0,1,2].map(i=>`<rect class="dash" data-i="${i}" x="${-31+i*22}" y="-3" width="${i===2?19:15}" height="6" rx="2"/>`).join('');
+    } else {
+      s += `<circle r="30" class="hit"/><g class="ico">${PICO[k]}</g>`;
+      if (p.label){
+        const ls = p.label.split('\n');
+        s += `<text text-anchor="middle" y="${k==='brewdirty'?30:34}">` + ls.map((l,i)=>`<tspan x="0" dy="${i?13:0}">${esc(l)}</tspan>`).join('') + `</text>`;
+      }
+    }
+    s += `</g>`;
+  }
+  return s + `<g class="ov"></g></svg>`;
+}
+function setScales(svg){
+  ['scaleP','scaleV'].forEach(k=>{
+    const g = svg.querySelector(`[data-k="${k}"]`); if(!g) return;
+    g.querySelectorAll('.dash').forEach(d=> d.classList.toggle('lv', +d.dataset.i < LEVEL[k]));
+  });
+}
+const ACT = {tap:'нажмите', hold1:'удерживайте 1 с', hold2:'удерживайте 2 с', both1:'вместе · 1 с', both2:'вместе · 2 с', lit:'горит', blink:'мигает', twice:'нажмите ещё раз'};
+function parseHi(h){ const i=h.indexOf(':'); return i<0 ? {k:h, a:null} : {k:h.slice(0,i), a:h.slice(i+1)}; }
+
+function applyPanel(svg, st = {}){
+  const lit = st.lit ?? 'all';
+  let on = lit==='all' ? PN_BTNS : lit==='none' ? [] : lit==='coffee' ? PN_COFFEE : lit;
+  on = new Set([...on, ...(st.on||[])]);
+  const blink = new Set(st.blink||[]);
+  svg.querySelectorAll('.pn').forEach(g=>{
+    const k = g.dataset.k;
+    g.classList.remove('off','blink','chase');
+    if (st.chase && PN_BTNS.includes(k) && k!=='power'){ g.classList.add('chase'); g.style.animationDelay = (PANEL[k].x/900*1.4).toFixed(2)+'s'; return; }
+    g.style.animationDelay='';
+    if (blink.has(k)) g.classList.add('blink');
+    else if (!on.has(k)) g.classList.add('off');
+  });
+  setScales(svg);
+  const ov = svg.querySelector('.ov'); ov.innerHTML='';
+  (st.hi||[]).map(parseHi).forEach(({k,a})=>{
+    const p = PANEL[k]; if(!p) return;
+    const r = p.kind==='scale' ? null : 31;
+    let html = `<g transform="translate(${p.x},${p.y})">`;
+    if (r){ html += `<circle r="${r}" class="ring2"/><circle r="${r}" class="ring"/>`; }
+    else { html += `<rect x="-42" y="-15" width="84" height="30" rx="10" class="ring2"/><rect x="-42" y="-15" width="84" height="30" rx="10" class="ring"/>`; }
+    if (a && /^(tap|hold|both|twice)/.test(a)) html += `<text class="finger ${a.startsWith('tap')||a==='twice'?'':'hold'}" x="8" y="${r?44:34}">👆</text>`;
+    html += `</g>`;
+    ov.insertAdjacentHTML('beforeend', html);
+    if (a){ addTag(ov, ACT[a]||a, p.x, p.y - (r?56:34), 900, a==='lit'||a==='blink'?'dark':'', 18); }
+  });
+}
+function addTag(ov, text, x, y, vbw, cls='', fs=12.5){
+  const g = document.createElementNS(NS,'g'); g.setAttribute('class','tag '+cls);
+  const rect = document.createElementNS(NS,'rect');
+  const t = document.createElementNS(NS,'text'); t.setAttribute('text-anchor','middle'); t.setAttribute('y', (fs*0.36).toFixed(1)); t.style.fontSize = fs+'px'; t.textContent = text;
+  g.append(rect,t); ov.appendChild(g);
+  let w = 0; try{ w = t.getComputedTextLength(); }catch(e){}
+  if (!w) w = text.length*fs*0.56;
+  w += fs*1.7; const hh = fs*2.1;
+  x = Math.max(w/2+6, Math.min(vbw - w/2 - 6, x));
+  y = Math.max(hh/2+4, y);
+  rect.setAttribute('x', -w/2); rect.setAttribute('y', -hh/2); rect.setAttribute('width', w); rect.setAttribute('height', hh); rect.setAttribute('rx', hh/2);
+  g.setAttribute('transform', `translate(${x.toFixed(1)},${y.toFixed(1)})`);
+}
+
+/* ============================================================
+   Machine views (SVG)
+   ============================================================ */
+const PART = {
+  tank:'Резервуар для воды', lid:'Крышка отсека для зёрен', panelzone:'Панель управления', spout:'Дозатор кофе',
+  wand:'Капучинатор', tray:'Поддон для капель', grate:'Решётка поддона', cup:'Кружка', bowl:'Ёмкость 1,5 л',
+  jug:'Кувшин с молоком', smallcup:'Пустая ёмкость', cord:'Вилка — в розетку с заземлением', sw:'Выключатель сзади → I',
+  brew:'Заварочный блок', latch:'Фиксаторы блока', bracket:'Кронштейн', grounds:'Контейнер для жмыха',
+  innertray:'Внутренний поддон', door:'Боковая крышка', doorc:'Боковая крышка', brush:'Щёточка', hopper:'Отсек для зёрен',
+  beans:'Зёрна', dial:'Регулятор помола', burr:'Внешние жернова', pointer:'Стрелка-указатель', lidT:'Крышка отсека'
+};
+const VIEW_NAME = {panel:'Панель управления', front:'Кофемашина спереди', side:'Боковая крышка открыта', top:'Отсек для зёрен (вид сверху)'};
+
+function frontSVG(){
+  const dots = r => Array.from({length:7},(_,i)=>`<circle cx="${102+i*41}" cy="${r}" r="3.2" fill="#6b6061"/>`).join('');
+  return `<svg viewBox="0 0 460 400" class="mv" role="img" aria-label="Кофемашина, вид спереди">
+  <ellipse cx="225" cy="372" rx="200" ry="10" fill="rgba(42,23,20,.12)"/>
+  <g id="cord" class="part"><path d="M52 318 C 18 322, 34 372, 6 376" fill="none" stroke="#211B1C" stroke-width="5" stroke-linecap="round"/><rect x="-2" y="368" width="16" height="16" rx="3" fill="#211B1C"/></g>
+  <g id="tank" class="part"><rect x="276" y="14" width="126" height="84" rx="10" fill="#C6D6E5" fill-opacity=".92" stroke="#6F8DAE" stroke-width="2"/><path d="M288 34h22" stroke="#2A1714" stroke-width="2"/><text x="314" y="38" font-size="11" font-weight="800" fill="#2A1714" font-family="Manrope,sans-serif">MAX</text><path d="M286 30 v60" stroke="#fff" stroke-width="3" stroke-opacity=".6"/></g>
+  <rect x="50" y="56" width="350" height="296" rx="24" fill="#211B1C"/>
+  <rect x="50" y="56" width="350" height="296" rx="24" fill="none" stroke="#3a3233" stroke-width="2"/>
+  <g id="lid" class="part"><rect x="66" y="45" width="196" height="16" rx="6" fill="#3a3233" stroke="#4d4344"/></g>
+  <g id="panelzone" class="part"><rect x="74" y="74" width="302" height="52" rx="12" fill="#2b2425" stroke="#4a4042"/>${dots(92)}${dots(112)}</g>
+  <rect x="112" y="140" width="226" height="172" rx="14" fill="#120e0f"/>
+  <g id="spout" class="part"><rect x="186" y="146" width="80" height="62" rx="10" fill="#3d3536" stroke="#55494a"/><rect x="206" y="207" width="12" height="11" rx="3" fill="#6a5d5e"/><rect x="234" y="207" width="12" height="11" rx="3" fill="#6a5d5e"/><path d="M226 158l-6 7h12z M226 196l-6-7h12z" fill="#7d7071"/></g>
+  <g id="bowl" class="opt"><path d="M150 236h152l-10 64H160z" fill="#C6D6E5" fill-opacity=".9" stroke="#6F8DAE" stroke-width="2"/><text x="226" y="282" text-anchor="middle" font-size="13" font-weight="800" fill="#2A1714" font-family="Manrope,sans-serif">1,5 л</text></g>
+  <g id="cup" class="opt"><path d="M196 250h60l-6 50h-48z" fill="#EFE2CF" stroke="#bfae97" stroke-width="2"/><path d="M256 260a11 11 0 0 1-2 24" fill="none" stroke="#EFE2CF" stroke-width="5"/></g>
+  <g class="fx" id="fx-coffee"><line x1="212" y1="220" x2="212" y2="262" class="stream coffee"/><line x1="240" y1="220" x2="240" y2="262" class="stream coffee"/></g>
+  <g class="fx" id="fx-water"><line x1="212" y1="220" x2="212" y2="262" class="stream water"/><line x1="240" y1="220" x2="240" y2="262" class="stream water"/></g>
+  <g id="wand" class="part"><rect x="354" y="148" width="18" height="24" rx="5" fill="#4a4042" stroke="#5c5051"/><rect x="359" y="170" width="8" height="94" rx="3" fill="#b8b0aa"/><rect x="356.5" y="260" width="13" height="22" rx="4" fill="#e3ddd7" stroke="#9a908a"/></g>
+  <g class="fx" id="fx-wandwater"><line x1="363" y1="284" x2="363" y2="300" class="stream water"/></g>
+  <g id="smallcup" class="opt"><path d="M342 278h42l-5 24h-32z" fill="#C6D6E5" fill-opacity=".9" stroke="#6F8DAE" stroke-width="2"/></g>
+  <g id="jug" class="opt"><path d="M334 232h60l-5 70h-50z" fill="#d9d2cc" fill-opacity=".8" stroke="#8d847e" stroke-width="2"/><path d="M336.5 256h55.2l-3.6 44h-48z" fill="#fffaf1" fill-opacity=".88"/><path d="M394 240c12 2 12 30 -2 34" fill="none" stroke="#8d847e" stroke-width="3"/><circle cx="350" cy="256" r="5" fill="#fff"/><circle cx="376" cy="255" r="6" fill="#fff"/></g>
+  <g class="fx" id="fx-steam"><circle class="puff" cx="352" cy="262" r="7"/><circle class="puff" cx="366" cy="258" r="8"/><circle class="puff" cx="378" cy="262" r="6"/></g>
+  <g id="grate" class="part"><rect x="120" y="298" width="212" height="14" rx="4" fill="#5a5051" stroke="#6b6061"/>${Array.from({length:12},(_,i)=>`<rect x="${130+i*16.5}" y="302" width="9" height="6" rx="2" fill="#2b2425"/>`).join('')}</g>
+  <g id="tray" class="part"><rect x="94" y="312" width="262" height="44" rx="11" fill="#2f2829" stroke="#4a4042" stroke-width="2"/><rect x="200" y="328" width="50" height="8" rx="4" fill="#4a4042"/></g>
+  <g id="sw" class="part"><rect x="30" y="250" width="16" height="30" rx="4" fill="#3a3233" stroke="#5c5051"/><text x="38" y="270" text-anchor="middle" font-size="12" font-weight="800" fill="#F2A93B" font-family="Manrope,sans-serif">I</text></g>
+  <g class="ov"></g></svg>`;
+}
+function sideSVG(){
+  return `<svg viewBox="0 0 460 400" class="mv" role="img" aria-label="Кофемашина, боковая крышка">
+  <ellipse cx="225" cy="392" rx="200" ry="7" fill="rgba(42,23,20,.12)"/>
+  <rect x="60" y="34" width="330" height="310" rx="22" fill="#211B1C"/>
+  <rect x="60" y="34" width="330" height="310" rx="22" fill="none" stroke="#3a3233" stroke-width="2"/>
+  <rect x="104" y="80" width="242" height="248" rx="14" fill="#100c0d"/>
+  <g id="brew" class="part"><rect x="168" y="96" width="114" height="134" rx="18" fill="#8d827c" stroke="#a2978f"/><circle cx="225" cy="146" r="28" fill="#6f6560"/><circle cx="225" cy="146" r="13" fill="#4f4643"/><rect x="190" y="194" width="70" height="22" rx="6" fill="#6f6560"/><path d="M225 104v14" stroke="#a2978f" stroke-width="4" stroke-linecap="round"/></g>
+  <g id="latch" class="part"><rect x="156" y="140" width="14" height="44" rx="5" fill="#C6D6E5" stroke="#6F8DAE"/><rect x="280" y="140" width="14" height="44" rx="5" fill="#C6D6E5" stroke="#6F8DAE"/></g>
+  <g id="bracket" class="part"><rect x="146" y="236" width="158" height="13" rx="4" fill="#5d5354" stroke="#71666a"/><g fill="#8a6a50">${Array.from({length:8},(_,i)=>`<circle cx="${160+i*19}" cy="242" r="2"/>`).join('')}</g></g>
+  <g id="grounds" class="part"><rect x="130" y="256" width="190" height="46" rx="8" fill="#4d4445" stroke="#635859"/><g fill="#6B3A22">${Array.from({length:14},(_,i)=>`<circle cx="${144+i*12.5}" cy="${266+(i%3)*4}" r="4"/>`).join('')}</g></g>
+  <g id="innertray" class="part"><rect x="118" y="306" width="214" height="14" rx="4" fill="#3f3738" stroke="#5a4f50"/></g>
+  <g id="door" class="part"><path d="M104 348 L346 348 L392 394 L58 394 Z" fill="#2f2829" stroke="#4a4042" stroke-width="2"/>${Array.from({length:6},(_,i)=>`<path d="M${290+i*8} 360 l10 22" stroke="#4a4042" stroke-width="2"/>`).join('')}<circle cx="150" cy="372" r="5" fill="#4a4042"/></g>
+  <g id="doorc" class="opt"><rect x="98" y="74" width="254" height="260" rx="16" fill="#2f2829" stroke="#4a4042" stroke-width="2"/>${Array.from({length:6},(_,i)=>`<path d="M${250+i*10} 280 l12 30" stroke="#4a4042" stroke-width="2"/>`).join('')}<circle cx="225" cy="300" r="6" fill="#4a4042"/></g>
+  <g id="brush" class="opt"><path d="M330 150 L250 236" stroke="#E9DCCB" stroke-width="7" stroke-linecap="round"/><path d="M252 233 l-14 16" stroke="#2A1714" stroke-width="11" stroke-linecap="butt"/><path d="M233 248 l-6 6 M238 252 l-6 6 M243 247 l-6 6" stroke="#2A1714" stroke-width="2"/></g>
+  <g class="ov"></g></svg>`;
+}
+function topSVG(){
+  const nums = Array.from({length:15},(_,i)=>{const a=(-140+i*20)*Math.PI/180;return `<text x="${(230+58*Math.sin(a)).toFixed(1)}" y="${(204-58*Math.cos(a)).toFixed(1)}" text-anchor="middle" font-size="10.5" font-weight="800" fill="#EFE2CF" font-family="Manrope,sans-serif">${i+1}</text>`}).join('');
+  const beans = Array.from({length:26},(_,i)=>{const a=i/26*Math.PI*2;const r=100+((i*37)%18);return `<ellipse cx="${(230+r*Math.cos(a)).toFixed(1)}" cy="${(200+r*0.92*Math.sin(a)).toFixed(1)}" rx="7" ry="5" transform="rotate(${(i*47)%180} ${(230+r*Math.cos(a)).toFixed(1)} ${(200+r*0.92*Math.sin(a)).toFixed(1)})" fill="#5B321F" stroke="#3b1f12"/>`}).join('');
+  return `<svg viewBox="0 0 460 400" class="mv" role="img" aria-label="Отсек для зёрен, вид сверху">
+  <rect x="44" y="24" width="372" height="352" rx="28" fill="#211B1C"/>
+  <g id="hopper" class="part"><rect x="92" y="62" width="276" height="276" rx="40" fill="#120e0f" stroke="#3a3233" stroke-width="3"/></g>
+  <g id="beans" class="opt">${beans}</g>
+  <g id="burr" class="part"><circle cx="230" cy="200" r="62" fill="#6d635e" stroke="#857a74" stroke-width="2"/><circle cx="230" cy="200" r="38" fill="#2b2425"/>${Array.from({length:18},(_,i)=>{const a=i*20*Math.PI/180;return `<path d="M${(230+40*Math.cos(a)).toFixed(1)} ${(200+40*Math.sin(a)).toFixed(1)}L${(230+58*Math.cos(a)).toFixed(1)} ${(200+58*Math.sin(a)).toFixed(1)}" stroke="#9c918a" stroke-width="3"/>`}).join('')}</g>
+  <g id="dial" class="part"><circle cx="230" cy="200" r="76" fill="#3a3233" stroke="#55494a" stroke-width="2"/>${nums}<circle cx="230" cy="200" r="40" fill="#141011" stroke="#55494a" stroke-width="2"/><rect x="224" y="168" width="12" height="64" rx="6" fill="#2b2425" stroke="#55494a"/></g>
+  <g id="pointer" class="part"><path d="M230 126 l-10 -18 h20z" fill="#F2A93B"/></g>
+  <g id="arr-cw" class="fx"><g class="spin-cw"><path d="M138 200 A92 92 0 0 1 230 108" class="arrowfx"/><path d="M222 98 L236 108 L222 118" class="arrowfx" stroke-linejoin="round"/></g></g>
+  <g id="arr-ccw" class="fx"><g class="spin-ccw"><path d="M322 200 A92 92 0 0 0 230 108" class="arrowfx"/><path d="M238 98 L224 108 L238 118" class="arrowfx" stroke-linejoin="round"/></g></g>
+  <g id="lidT" class="opt"><rect x="84" y="54" width="292" height="292" rx="44" fill="#3a3233" fill-opacity=".92" stroke="#55494a" stroke-width="2"/><text x="230" y="206" text-anchor="middle" font-size="14" font-weight="800" fill="#EFE2CF" font-family="Manrope,sans-serif">крышка закрыта</text></g>
+  <g class="ov"></g></svg>`;
+}
+
+function applyMachine(svg, st){
+  svg.querySelectorAll('.hl').forEach(e=>e.classList.remove('hl'));
+  svg.querySelectorAll('.opt').forEach(e=>e.classList.remove('show'));
+  svg.querySelectorAll('.fx').forEach(e=>e.classList.remove('show'));
+  svg.querySelectorAll('.gone').forEach(e=>e.classList.remove('gone'));
+  const ov = svg.querySelector('.ov'); ov.innerHTML='';
+  (st.show||[]).forEach(id=> svg.querySelector('#'+id)?.classList.add('show'));
+  (st.hide||[]).forEach(id=> svg.querySelector('#'+id)?.classList.add('gone'));
+  (st.fx||[]).forEach(id=> svg.querySelector('#fx-'+id)?.classList.add('show'));
+  if (st.arrow) svg.querySelector('#arr-'+st.arrow)?.classList.add('show');
+  if (st.closed){ svg.querySelector('#doorc')?.classList.add('show'); svg.querySelector('#door')?.classList.add('gone'); }
+  const his = (st.hi||[]).map(parseHi);
+  his.forEach(({k})=> { const el = svg.querySelector('#'+k); if(el){ el.classList.add('hl'); if(el.classList.contains('opt')) el.classList.add('show'); } });
+  his.forEach(({k,a}, i)=>{
+    const el = svg.querySelector('#'+k); if(!el) return;
+    let b; try{ b = el.getBBox(); }catch(e){ return; }
+    if (!b || !b.width) return;
+    const txt = a || PART[k] || k;
+    let y = b.y - 18; if (i%2===1 || y < 18) y = Math.min(b.y + b.height + 20, 388);
+    addTag(ov, txt, b.x + b.width/2, y, 460);
+  });
+}
+
+/* ============================================================
+   Scenarios
+   ============================================================ */
+const W = {
+  burn:'Осторожно: горячий пар и вода — не подставляйте руки под сопло и дозатор.',
+  water:'Воду наливайте только в снятый резервуар. Только холодная фильтрованная вода, не выше MAX.',
+  runningOpen:'Не открывайте боковую крышку во время работы — сначала дождитесь режима ожидания.',
+  standby:'Контейнер для жмыха и заварочный блок чистите при включённой машине в режиме ожидания — иначе индикатор не сбросится.',
+  noAbrasive:'Только мягкая сторона губки и мягкое средство для посуды. Без абразивов и агрессивной химии.',
+};
+
+function drinkSteps(k, label){
+  const isWater = k==='hotwater';
+  const st = [
+    {v:'front', t:'Отрегулируйте высоту дозатора под вашу кружку — сдвиньте его вверх или вниз.', hi:['spout:высота ↕']},
+    {v:'front', t:'Поставьте кружку под дозатор на решётку поддона.', hi:['cup'], show:['cup']},
+  ];
+  if (!isWater) st.push({v:'panel', t:'По желанию настройте крепость (ПОРЦИЯ) и объём (ОБЪЁМ). Это делается ДО запуска — во время приготовления настройки недоступны.', hi:['portion:крепость','volume:объём'], tip:'Подробно — в разделе «Крепость и объём».'});
+  st.push(
+    {v:'panel', t:`Нажмите кнопку «${label}».`, hi:[k+':tap']},
+    {v:'panel', t:`Кнопка «${label}» горит, остальные погасли — идёт приготовление. Чтобы отменить, нажмите эту же кнопку ещё раз.`, lit:[k], hi:[k+':отмена — ещё раз']},
+    {v:'front', t: isWater ? 'Горячая вода льётся в кружку.' : 'Кофе льётся в кружку. Не убирайте кружку, пока поток не остановится.', show:['cup'], fx:[isWater?'water':'coffee']},
+    {v:'panel', t:'Все кнопки снова горят постоянно — напиток готов, машина в режиме ожидания.', lit:'all'},
+  );
+  return st;
+}
+
+const SC = [
+  { id:'power', main:true, title:'Включение кофемашины', sub:'Вода, зёрна, запуск и прогрев', icon:'power',
+    warn:[W.water],
+    steps:[
+      {v:'front', t:'Проверьте, что поддон для капель с решёткой стоит под дозатором. Если в поддоне есть жидкость — слейте её.', hi:['tray','grate']},
+      {v:'front', t:'Снимите резервуар, налейте холодную фильтрованную воду не выше MAX и установите резервуар на место.', hi:['tank:резервуар → до MAX'], w:'Не наливайте воду в резервуар, стоящий на машине. Тёплую и горячую воду — нельзя.'},
+      {v:'top', t:'Откройте крышку отсека и засыпьте кофейные зёрна (до 180 г). Не утрамбовывайте. Закройте крышку.', hi:['hopper:засыпьте зёрна'], show:['beans'], w:'Нельзя: карамелизованные и зелёные зёрна, кофе с добавками.'},
+      {v:'front', t:'Вставьте вилку в розетку с заземлением. Выключатель на задней стенке (над разъёмом шнура) — в положение I.', hi:['cord','sw']},
+      {v:'panel', t:'Нажмите кнопку ⏻.', lit:'none', hi:['power:tap']},
+      {v:'panel', t:'Кнопка ⏻ мигает, «Очистка» мигает — идёт самоочистка. Из дозатора выльется немного воды.', lit:'none', blink:['power','clean'], hi:['clean:мигает']},
+      {v:'panel', t:'Загорелись кнопки кофе: уже можно готовить эспрессо, двойной эспрессо и американо.', lit:'coffee', blink:['hotwater','steam','clean'], hi:['espresso:можно готовить','double','americano']},
+      {v:'panel', t:'«Горячая вода», «Молочная пена» и «Очистка» ещё мигают — бойлер догревается до температуры пара. Подождите.', lit:'coffee', blink:['hotwater','steam','clean'], hi:['steam:мигает — ждём']},
+      {v:'panel', t:'Все кнопки горят постоянно — машина готова, доступны все режимы.', lit:'all', tip:'Через 28 минут без действий машина сама уходит в спящий режим.'},
+    ],
+    related:['firstrun','drinks','sleep','errors'] },
+
+  { id:'drinks', main:true, title:'Приготовление напитков', sub:'Эспрессо, двойной, американо, горячая вода', icon:'drinks',
+    variants:[{id:'espresso',name:'Эспрессо'},{id:'double',name:'Двойной эспрессо'},{id:'americano',name:'Американо'},{id:'hotwater',name:'Горячая вода'}],
+    stepsFor:v=>drinkSteps(v.id, v.name),
+    related:['settings','grind','milk','errors'] },
+
+  { id:'milk', main:true, title:'Взбивание молока', sub:'Капучинатор: пар и молочная пена', icon:'milk',
+    warn:[W.burn,'Пена больше молока по объёму — берите достаточно большой кувшин.'],
+    steps:[
+      {v:'panel', t:'Дождитесь, пока кнопка «Молочная пена» перестанет мигать и будет гореть постоянно.', lit:'all', hi:['steam:горит — готово']},
+      {v:'front', t:'Подставьте пустую ёмкость под сопло капучинатора (или направьте сопло в лоток).', hi:['smallcup','wand'], show:['smallcup']},
+      {v:'panel', t:'Нажмите «Молочная пена» — сначала из сопла польётся вода из термоблока (5–10 секунд).', hi:['steam:tap']},
+      {v:'front', t:'Ждите: вода перестанет течь и пойдёт пар.', show:['smallcup'], fx:['wandwater','steam'], hi:['wand:вода → пар']},
+      {v:'panel', t:'Как только пошёл пар — нажмите «Молочная пена» ещё раз, чтобы остановить.', lit:['steam'], hi:['steam:twice']},
+      {v:'front', t:'Налейте в кувшин холодное молоко и погрузите сопло капучинатора в молоко примерно на треть.', hi:['jug:молоко 2–8 °C','wand'], show:['jug'], tip:'Лучше всего: цельное, пастеризованное или ультрапастеризованное молоко, от 1,5 % жирности и от 3 % белка.'},
+      {v:'panel', t:'Нажмите «Молочная пена» — пойдёт пар.', hi:['steam:tap']},
+      {v:'front', t:'Медленно вращайте кувшин, пока не получится пена нужной плотности.', show:['jug'], fx:['steam'], hi:['jug:вращайте кувшин'], w:'Не трогайте металлическое сопло — оно очень горячее.'},
+      {v:'panel', t:'Нажмите «Молочная пена» ещё раз — подача пара остановится.', lit:['steam'], hi:['steam:стоп']},
+      {v:'front', t:'Сразу после: подставьте пустую ёмкость и включите пар на 5–10 секунд — так промоются остатки молока внутри.', show:['smallcup'], fx:['steam'], hi:['wand:промыть паром']},
+      {v:'front', t:'Снимите металлическое сопло, потянув его вниз, промойте под проточной водой и установите обратно.', hi:['wand:снять ↓ и промыть']},
+    ],
+    related:['wandclean','drinks','errors'] },
+
+  { id:'clean', main:true, title:'Очистка', sub:'Самоочистка дозатора + что и когда чистить', icon:'clean',
+    intro:'when',
+    steps:[
+      {v:'front', t:'Поставьте ёмкость под дозатор.', hi:['cup:ёмкость'], show:['cup']},
+      {v:'panel', t:'Нажмите кнопку «Очистка».', hi:['clean:tap']},
+      {v:'front', t:'15 секунд через дозатор будет литься горячая вода.', show:['cup'], fx:['water'], hi:['spout:15 секунд'], w:W.burn},
+      {v:'panel', t:'Машина вернулась в режим ожидания — все кнопки горят.', lit:'all'},
+      {v:'front', t:'Вылейте воду из ёмкости. По мере заполнения сливайте и поддон для капель.', hi:['tray']},
+    ],
+    related:['tray','wandclean','grounds','brew','bracket','grinderq','grinderf','descale'] },
+
+  /* ---- taste ---- */
+  { id:'grind', group:'taste', title:'Степень помола', sub:'Регулятор 1–15 внутри отсека для зёрен', icon:'grind',
+    warn:['Крутите регулятор только во время работы кофемолки — иначе целые зёрна могут заклинить механизм.'],
+    steps:[
+      {v:'top', t:'Откройте крышку отсека для зёрен. В центре — регулятор помола со шкалой от 1 (мелкий) до 15 (крупный).', hi:['dial'], show:['beans']},
+      {v:'top', t:'Стрелка-указатель рядом с регулятором показывает выбранную степень.', hi:['pointer'], show:['beans']},
+      {v:'top', t:'По часовой стрелке — помол мельче, вкус насыщеннее.', hi:['dial:мельче, крепче'], arrow:'cw', show:['beans']},
+      {v:'top', t:'Против часовой — помол крупнее, вкус мягче.', hi:['dial:крупнее, мягче'], arrow:'ccw', show:['beans']},
+      {v:'panel', t:'Поворачивайте регулятор, пока кофемолка работает — например, сразу после нажатия кнопки напитка.', hi:['espresso:tap']},
+      {v:'top', t:'Для первого раза поставьте середину — 6–9.', hi:['dial:старт: 6–9'], show:['beans'], tip:'Кофе льётся медленно → сделайте помол крупнее. Льётся быстро, слабый, без пенки → мельче.'},
+    ],
+    related:['settings','drinks','errors'] },
+
+  { id:'settings', group:'taste', title:'Крепость и объём', sub:'Кнопки ПОРЦИЯ и ОБЪЁМ, шкалы 1–3', icon:'settings',
+    note:'Попробуйте: нажмите ПОРЦИЯ или ОБЪЁМ прямо на схеме — шкала переключится.',
+    steps:[
+      {v:'panel', t:'ПОРЦИЯ — количество молотого кофе (крепость). Каждое нажатие меняет значение по кругу: 1 → 2 → 3 → 1.', hi:['portion:tap','scaleP']},
+      {v:'panel', t:'ОБЪЁМ — сколько напитка нальётся. Тоже 1 → 2 → 3 → 1.', hi:['volume:tap','scaleV']},
+      {v:'panel', t:'Шкала над кнопкой показывает текущее значение. По умолчанию — 2 (середина).', hi:['scaleP:шкала','scaleV']},
+      {v:'panel', t:'Меняйте настройки ДО запуска напитка, потом нажмите кнопку напитка. Во время приготовления изменить нельзя.', hi:['espresso:потом напиток']},
+    ],
+    related:['reset','drinks','grind'] },
+
+  { id:'reset', group:'taste', title:'Сброс настроек', sub:'Вернуть заводские значения', icon:'reset',
+    steps:[
+      {v:'panel', t:'Одновременно нажмите и удерживайте «Эспрессо» и «Двойной эспрессо» 2 секунды.', hi:['espresso:both2','double:both2']},
+      {v:'panel', t:'Все настройки приготовления вернулись к заводским (ПОРЦИЯ и ОБЪЁМ = 2).', lit:'all', hi:['scaleP:= 2','scaleV'], resetLevels:true},
+    ],
+    related:['settings'] },
+
+  /* ---- care ---- */
+  { id:'tray', group:'care', title:'Поддон для капель', sub:'Слить и промыть по мере заполнения', icon:'tray',
+    steps:[
+      {v:'front', t:'Потяните поддон для капель на себя и снимите его вместе с решёткой.', hi:['tray:потяните на себя','grate']},
+      {v:'front', t:'Слейте воду, промойте поддон и решётку тёплой водой с мягким средством для посуды.', hi:['tray:слить и промыть'], w:W.noAbrasive},
+      {v:'front', t:'Вытрите насухо и установите поддон на место под дозатор.', hi:['tray','grate']},
+    ],
+    related:['clean','grounds'] },
+
+  { id:'wandclean', group:'care', title:'Чистка капучинатора', sub:'После каждого взбивания молока', icon:'wand',
+    warn:['Дайте капучинатору остыть перед разборкой.'],
+    steps:[
+      {v:'front', t:'Быстрая очистка: подставьте пустую ёмкость и включите пар на 5–10 секунд — промоются остатки молока.', show:['smallcup'], fx:['steam'], hi:['wand:пар 5–10 с']},
+      {v:'panel', t:'Пар включается и выключается кнопкой «Молочная пена».', hi:['steam:tap']},
+      {v:'front', t:'Полная очистка: потяните вниз металлическую трубку капучинатора и снимите пластиковое сопло.', hi:['wand:потяните вниз']},
+      {v:'front', t:'Промойте детали под проточной водой с мягким средством для посуды.', hi:['wand:промыть'], w:W.noAbrasive},
+      {v:'front', t:'Протрите салфеткой, соберите в обратном порядке и установите на место.', hi:['wand:собрать']},
+    ],
+    related:['milk','errors'] },
+
+  { id:'grounds', group:'care', title:'Контейнер для жмыха', sub:'Когда горит «Очистите осадок»', icon:'grounds',
+    warn:[W.standby, W.runningOpen],
+    steps:[
+      {v:'panel', t:'Загорелся индикатор «Очистите осадок» — контейнер для жмыха заполнен.', lit:'all', on:['grounds'], hi:['grounds:горит']},
+      {v:'side', t:'Машина включена и в режиме ожидания. Откройте боковую крышку.', closed:true, hi:['doorc:откройте крышку']},
+      {v:'side', t:'Выньте контейнер для жмыха и внутренний поддон для капель.', hi:['grounds','innertray']},
+      {v:'side', t:'Опустошите контейнер и поддон, промойте под проточной водой мягкой стороной губки.', hide:['grounds','innertray'], w:W.noAbrasive},
+      {v:'side', t:'Прочистите щёточкой внутренние полости машины.', hide:['grounds','innertray'], show:['brush'], hi:['brush:щёточкой']},
+      {v:'side', t:'Высушите детали, установите на место и закройте боковую крышку.', hi:['grounds','innertray']},
+      {v:'panel', t:'Индикатор погас — готово.', lit:'all'},
+    ],
+    related:['brew','errors','tray'] },
+
+  { id:'brew', group:'care', title:'Заварочный блок', sub:'Когда горит «Очистите заварочный механизм»', icon:'brew',
+    warn:[W.standby, W.runningOpen],
+    steps:[
+      {v:'panel', t:'Горит индикатор «Очистите заварочный механизм».', lit:'all', on:['brewdirty'], hi:['brewdirty:горит']},
+      {v:'side', t:'Откройте боковую крышку (машина включена, режим ожидания).', closed:true, hi:['doorc:откройте крышку']},
+      {v:'side', t:'Нажмите на боковые фиксаторы и потяните блок на себя.', hi:['latch:нажмите фиксаторы','brew:тяните на себя']},
+      {v:'side', t:'Промойте блок под проточной водой мягкой стороной губки с мягким средством. Протрите или просушите.', hide:['brew','latch'], hi:['bracket:место блока'], w:W.noAbrasive},
+      {v:'side', t:'Установите блок на место до щелчка.', hi:['brew:до щелчка']},
+      {v:'side', t:'Закройте боковую крышку. Индикатор погаснет.', closed:true, hi:['doorc:закройте']},
+    ],
+    related:['bracket','grounds','errors'] },
+
+  { id:'bracket', group:'care', title:'Кронштейн блока', sub:'Еженедельная чистка', icon:'bracket',
+    steps:[
+      {v:'panel', t:'Одновременно нажмите и удерживайте «Двойной эспрессо» и «Очистка» 1 секунду.', hi:['double:both1','clean:both1']},
+      {v:'side', t:'Кронштейн заварочного блока опустится.', closed:true, tip:'Подождите, пока механизм остановится.'},
+      {v:'side', t:'Откройте боковую крышку и очистите кронштейн щёточкой.', show:['brush'], hi:['bracket:чистим щёточкой']},
+      {v:'side', t:'Закройте боковую крышку.', closed:true, hi:['doorc:закройте']},
+      {v:'panel', t:'Снова одновременно удерживайте «Двойной эспрессо» и «Очистка» 1 секунду — блок вернётся в рабочее положение.', hi:['double:both1','clean:both1']},
+    ],
+    related:['brew','grounds'] },
+
+  { id:'grinderq', group:'care', title:'Быстрая очистка кофемолки', sub:'При смене сорта или старых зёрнах', icon:'grinderq',
+    steps:[
+      {v:'top', t:'Уберите старые зёрна из отсека (если меняете сорт).', hi:['hopper']},
+      {v:'panel', t:'Нажмите и удерживайте «Очистка кофемолки» 1 секунду.', hi:['grindclean:hold1']},
+      {v:'side', t:'Кофемолка работает 15 секунд и сбрасывает молотое зерно в контейнер для жмыха.', closed:true, tip:'После — опустошите контейнер для жмыха.'},
+      {v:'side', t:'Опустошите контейнер для жмыха.', hi:['grounds']},
+    ],
+    related:['grinderf','grounds'] },
+
+  { id:'grinderf', group:'care', title:'Полная очистка кофемолки', sub:'Разборка жерновов', icon:'grinderf',
+    steps:[
+      {v:'top', t:'Снимите крышку отсека для зёрен.', show:['lidT'], hi:['lidT:снимите крышку']},
+      {v:'top', t:'Поверните регулятор помола против часовой стрелки до упора и потяните его вверх.', arrow:'ccw', hi:['dial:до упора и вверх']},
+      {v:'top', t:'Снимите внешние жернова: против часовой стрелки и вверх.', hide:['dial','pointer'], arrow:'ccw', hi:['burr:против часовой ↑']},
+      {v:'top', t:'Очистите снятые детали и внутренние полости кофемолки щёточкой.', hide:['dial','burr','pointer'], hi:['hopper:щёточкой']},
+      {v:'top', t:'Установите на место ТОЛЬКО регулятор помола, повернув его по часовой стрелке.', hide:['burr'], arrow:'cw', hi:['dial:только регулятор']},
+      {v:'panel', t:'Нажмите и удерживайте «Очистка кофемолки» 1 секунду — кофемолка поработает 15 секунд и выдует остатки.', hi:['grindclean:hold1']},
+      {v:'top', t:'Снова снимите регулятор (против часовой до упора и вверх). Если остались частицы — щёточка или повторите 2 предыдущих шага.', hide:['burr','pointer'], arrow:'ccw', hi:['dial']},
+      {v:'top', t:'Установите внешние жернова и поверните по часовой для фиксации.', hide:['dial','pointer'], arrow:'cw', hi:['burr:по часовой']},
+      {v:'top', t:'Установите регулятор помола по часовой стрелке. Готово.', arrow:'cw', hi:['dial:по часовой']},
+    ],
+    related:['grinderq','grind'] },
+
+  { id:'descale', group:'care', title:'Очистка от накипи', sub:'Примерно каждые 500 кружек', icon:'descale',
+    warn:['Средство — специальное для кофемашин (по его инструкции) или 3 % раствор лимонной кислоты.', W.burn],
+    steps:[
+      {v:'panel', t:'Сигнал: одновременно мигают «Горячая вода» и «Очистка».', lit:'all', blink:['hotwater','clean'], hi:['hotwater:мигает','clean']},
+      {v:'front', t:'Снимите резервуар, налейте воду до MAX и растворите в ней средство от накипи. Установите резервуар.', hi:['tank:вода + средство']},
+      {v:'front', t:'Поставьте под дозатор ёмкость объёмом 1,5 литра.', show:['bowl'], hi:['bowl']},
+      {v:'panel', t:'Одновременно нажмите и удерживайте «Горячая вода» и «Очистка» 1 секунду.', hi:['hotwater:both1','clean:both1']},
+      {v:'panel', t:'Идёт очистка ~10 минут: индикаторы по очереди загораются слева направо. Не выключайте машину.', chase:true},
+      {v:'panel', t:'Кнопки «Горячая вода» и «Очистка» перестали мигать — очистка завершена.', lit:'all'},
+      {v:'front', t:'Вылейте жидкость из ёмкости и поставьте её обратно под дозатор.', show:['bowl'], hi:['bowl:вылить и вернуть']},
+      {v:'front', t:'Слейте остатки из резервуара, промойте его, налейте чистую фильтрованную воду и установите обратно.', hi:['tank:чистая вода']},
+      {v:'panel', t:'Несколько раз включите подачу горячей воды, чтобы вымыть остатки средства.', hi:['hotwater:tap × несколько раз']},
+    ],
+    related:['clean','service'] },
+
+  /* ---- help ---- */
+  { id:'errors', group:'help', title:'Индикаторы и ошибки', sub:'Что значит горящий значок и что делать', icon:'errors', special:'errors' },
+  { id:'sleep', group:'help', title:'Выключение и спящий режим', sub:'Как правильно выключить', icon:'sleep',
+    steps:[
+      {v:'panel', t:'Нажмите и удерживайте ⏻ 1 секунду — машина перейдёт в спящий режим.', hi:['power:hold1']},
+      {v:'panel', t:'Без действий 28 минут машина уходит в спящий режим сама.', lit:'none', on:['power'], hi:['power:28 мин → сон']},
+      {v:'panel', t:'Перед чисткой внутренних полостей: выключите машину кнопкой ⏻ и дождитесь окончания процесса выключения.', lit:'none', hi:['power:hold1']},
+      {v:'front', t:'Затем выньте вилку из розетки — сухими руками, держа за штепсель, а не за провод.', hi:['cord:тянуть за вилку']},
+    ],
+    related:['power','errors'] },
+  { id:'firstrun', group:'help', title:'Первый запуск', sub:'Распаковка и подготовка нового прибора', icon:'firstrun',
+    warn:['После перевозки или хранения в холоде — выдержите машину 2–3 часа при комнатной температуре.'],
+    steps:[
+      {v:'front', t:'Достаньте машину и комплектующие, уберите упаковку и транспортные наклейки снаружи и внутри.', tip:'Предупреждающие наклейки и табличку с серийным номером — НЕ снимайте.'},
+      {v:'front', t:'Протрите корпус влажной тканью. Съёмные детали (резервуар, поддоны, решётку) промойте с мягким средством и высушите.', hi:['tank','tray','grate']},
+      {v:'side', t:'Также промойте контейнер для жмыха, внутренний поддон и заварочный блок.', hi:['grounds','innertray','brew']},
+      {v:'front', t:'Поставьте на ровную, твёрдую, сухую поверхность, подальше от края и источников тепла. Полностью размотайте шнур.', hi:['cord:розетка с заземлением'], tip:'Удлинитель — только с заземлением и мощностью не менее 2,5 кВт.'},
+      {v:'front', t:'Дальше — по схеме «Включение кофемашины».', hi:['panelzone']},
+    ],
+    related:['power','parts'] },
+  { id:'parts', group:'help', title:'Устройство кофемашины', sub:'Детали, кнопки и характеристики', icon:'parts', special:'parts' },
+  { id:'storage', group:'help', title:'Хранение и перевозка', sub:'Как убрать машину надолго', icon:'storage',
+    warn:['Нельзя хранить при минусовой температуре: замёрзшая вода повредит бойлер и трубки.'],
+    steps:[
+      {v:'panel', t:'Выключите машину кнопкой ⏻ и дождитесь полного выключения, затем выньте вилку.', lit:'none', hi:['power:hold1']},
+      {v:'front', t:'Слейте воду из резервуара и поддона, очистите и высушите все съёмные части.', hi:['tank','tray']},
+      {v:'side', t:'Очистите контейнер для жмыха и заварочный блок, просушите.', hi:['grounds','brew']},
+      {v:'front', t:'Храните в сухом проветриваемом месте, вдали от батарей и прямого солнца. Берегите от ударов; упаковку — от воды.'},
+    ],
+    related:['sleep','firstrun'] },
+];
+const SCI = Object.fromEntries(SC.map(s=>[s.id,s]));
+const GROUPS = [
+  {id:'taste', title:'Настройка вкуса', sub:'помол, крепость, объём'},
+  {id:'help', title:'Справка и неполадки', sub:'если что-то пошло не так', cls:'grp-red'},
+];
+const WHEN = [
+  ['wandclean','После каждого молока'],['tray','По мере заполнения'],['grounds','Горит «Очистите осадок»'],['brew','Горит «Очистите завар. механизм»'],
+  ['bracket','Раз в неделю'],['grinderq','При смене зёрен'],['grinderf','При сильном загрязнении'],['descale','Мигают «Вода» + «Очистка» (~500 кружек)'],
+];
+
+/* ============================================================
+   Danger page
+   ============================================================ */
+const DANGER = [
+  {i:'⚡', t:'Электричество', l:[
+    'Включать, если повреждены корпус, шнур или вилка.',
+    'Включать в розетку без заземления. Удлинитель — только с заземлением и не слабее 2,5 кВт.',
+    'Тянуть за провод, браться за вилку мокрыми руками, переносить машину за шнур.',
+    'Класть шнур у источников тепла, в дверных проёмах, на острых краях и мокрых поверхностях.']},
+  {i:'💧', t:'Вода', l:[
+    'Погружать корпус, шнур или вилку в воду и ставить машину под струю.',
+    'Наливать воду в резервуар, пока он стоит на машине — сначала снимите его.',
+    'Наливать тёплую или горячую воду. Только холодная фильтрованная и не выше MAX.',
+    'Допускать попадание воды на панель управления, вилку и контакты.']},
+  {i:'🫘', t:'Кофе', l:[
+    'Засыпать карамелизованные или зелёные зёрна, кофе с добавками и ароматизаторами.',
+    'Утрамбовывать зёрна в отсеке.',
+    'Готовить больше 15 чашек подряд — кофемолка перегреется.',
+    'Крутить регулятор помола, когда кофемолка не работает, — может заклинить.']},
+  {i:'🔥', t:'Во время работы', l:[
+    'Открывать боковую крышку и снимать детали во время приготовления.',
+    'Подставлять руки под пар, трогать сопло капучинатора и дозатор — ожог!',
+    'Двигать включённую машину и накрывать её чем-либо.',
+    'Оставлять работающую машину без присмотра, подключать к таймерам и «умным» розеткам.']},
+  {i:'🧽', t:'Чистка', l:[
+    'Использовать абразивные губки, пасты и агрессивную химию.',
+    'Чистить внутренние полости, не выключив машину кнопкой ⏻ и не вынув вилку.',
+    'Снимать заварочный блок во время работы или после неправильного выключения.',
+    'Включать машину, пока контакты не высохли.']},
+  {i:'🏠', t:'Место, хранение, ремонт', l:[
+    'Хранить при минусовой температуре — замёрзшая вода разрушит бойлер.',
+    'Включать сразу после мороза — сначала 2–3 часа при комнатной температуре.',
+    'Ставить у плиты, батареи, на солнце, на улице, на неровную или мокрую поверхность.',
+    'Ремонтировать и разбирать самостоятельно, работать при любой неисправности.',
+    'Оставлять детей без присмотра рядом с машиной и упаковкой (опасность удушения).']},
+];
+const TOP3 = [
+  {i:'💧', t:'Заливать водой корпус', s:'Не погружайте машину, шнур и вилку в воду и не мойте под струёй.'},
+  {i:'🔌', t:'Розетка без заземления', s:'И никогда — с повреждённым шнуром, вилкой или корпусом.'},
+  {i:'♨️', t:'Горячая вода в резервуар', s:'Только холодная фильтрованная, и только в снятый резервуар.'},
+];
+function renderDanger(){
+  return `<section class="danger" aria-labelledby="dh">
+    <span class="kicker">⛔ Прочитайте до первого использования</span>
+    <h1 id="dh">Чего нельзя делать<br>ни в коем случае</h1>
+    <p class="lead">Нарушение этих правил грозит ожогом, ударом током, поломкой кофемашины и потерей гарантии. Всё остальное — в схемах дальше.</p>
+    <div class="top3">${TOP3.map(x=>`<div class="t"><span class="em">${x.i}</span><b>${esc(x.t)}</b><span>${esc(x.s)}</span></div>`).join('')}</div>
+    <div class="dgrid">${DANGER.map(g=>`<div class="dcard"><h3><i>${g.i}</i>${esc(g.t)}</h3><ul>${g.l.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`).join('')}</div>
+    <div class="go"><a class="btn cream" href="#home">Понятно, к схемам →</a><a class="btn ghost" href="#s-power">Как включить кофемашину</a></div>
+  </section>`;
+}
+
+/* ============================================================
+   Home
+   ============================================================ */
+function tile(s, i){
+  return `<a class="tile" href="#s-${s.id}">${i!=null?`<span class="num">0${i+1}</span>`:''}<span class="ic">${MI[s.icon]}</span><span><b>${esc(s.title)}</b><small>${esc(s.sub)}</small></span>${i==null?'<span class="go">→</span>':''}</a>`;
+}
+function renderHome(){
+  const main = SC.filter(s=>s.main);
+  let h = `<section class="hero">
+    <div><h1>Кофемашина <em>WCM-230</em><br>в понятных схемах</h1>
+    <p>Выберите ситуацию — откроется пошаговая схема: на панели и на самой кофемашине подсвечено, куда нажимать и что снимать.</p>
+    <div class="swatches" title="Палитра: Whispy Blue, Blood Red, Buttercream"><span style="background:var(--blue)"></span><span style="background:var(--red)"></span><span style="background:var(--cream)"></span></div></div>
+    <div class="fig-mini" id="heroPanel"></div>
+  </section>
+  <a class="alertbar" href="#danger"><span style="font-size:22px">⛔</span><span><b>Сначала — чего нельзя делать</b><br><span>25 правил безопасности из инструкции</span></span><span class="arr">Открыть</span></a>
+  <div class="sect"><h2>Главное</h2><span>с чего начать</span></div>
+  <div class="main4">${main.map((s,i)=>tile(s,i)).join('')}</div>`;
+  for (const g of GROUPS){
+    h += `<div class="sect"><h2>${esc(g.title)}</h2><span>${esc(g.sub)}</span></div><div class="grid ${g.cls||''}">${SC.filter(s=>s.group===g.id).map(s=>tile(s)).join('')}</div>`;
+  }
+  h += renderServiceShell();
+  return h;
+}
+
+/* ============================================================
+   Scenario page
+   ============================================================ */
+let CUR = null; // {s, steps, i, figs}
+function renderScenario(id, vid){
+  const s = SCI[id]; if(!s) return renderHome();
+  if (s.special === 'errors') return renderErrors(s);
+  if (s.special === 'parts') return renderParts(s);
+  const v = s.variants ? (s.variants.find(x=>x.id===vid) || s.variants[0]) : null;
+  const steps = v ? s.stepsFor(v) : s.steps;
+  CUR = {s, steps, i:0, v};
+  let h = `<div class="crumbs"><a class="back" href="#home">← Все разделы</a></div>
+  <div class="shead"><span class="ic">${MI[s.icon]}</span><div><h1>${esc(s.title)}</h1><p>${esc(s.sub)}</p></div></div>`;
+  if (s.variants) h += `<div class="variants">${s.variants.map(x=>`<a href="#s-${s.id}-${x.id}" class="${x.id===v.id?'on':''}">${esc(x.name)}</a>`).join('')}</div>`;
+  (s.warn||[]).forEach(w=> h += `<div class="warnbox"><span class="wi">!</span><span>${esc(w)}</span></div>`);
+  if (s.intro==='when') h += `<div class="intro"><div class="sect" style="margin-top:6px"><h2>Что и когда чистить</h2><span>нажмите, чтобы открыть схему</span></div><div class="when">${WHEN.map(([k,w])=>`<a href="#s-${k}"><span class="ic">${MI[SCI[k].icon]}</span><span><b>${esc(SCI[k].title)}</b><small>${esc(w)}</small></span></a>`).join('')}</div><div class="sect"><h2>Самоочистка дозатора</h2><span>быстро, можно каждый день</span></div></div>`;
+  h += `<div class="splay">
+    <div class="stage"><div class="vt"><span id="vname"></span><span class="cnt" id="vcnt"></span></div>
+      <div class="figbox" id="fig"></div>
+      <div class="cap"><span class="n" id="capn">1</span><p id="capt"></p></div>
+      <div class="ctrl"><button id="prev">← Назад</button><button id="next" class="nx">Дальше →</button></div>
+      <p class="swipehint">Листайте схему пальцем ← →</p>
+      ${s.note?`<p style="margin:10px 4px 0;font-size:13px;color:#34506B;font-weight:700">💡 ${esc(s.note)}</p>`:''}
+    </div>
+    <ol class="steps" id="steps">${steps.map((st,i)=>`<li data-i="${i}"><span class="n">${i+1}</span><div><p>${esc(st.t)}</p>${st.w?`<span class="w">⚠ ${esc(st.w)}</span>`:''}${st.tip?`<span class="tp">💡 ${esc(st.tip)}</span>`:''}</div></li>`).join('')}</ol>
+  </div>`;
+  if (s.related?.length) h += `<div class="related"><div class="sect" style="margin-top:0"><h2>Связанные схемы</h2></div><div class="chips">${s.related.map(r=> r==='service' ? `<a class="chip" href="#service"><span class="ci">${MI.service}</span>Тех-обслуживание</a>` : SCI[r]?`<a class="chip" href="#s-${r}"><span class="ci">${MI[SCI[r].icon]}</span>${esc(SCI[r].title)}</a>`:'').join('')}</div></div>`;
+  return h;
+}
+const FIGS = {panel:panelSVG, front:frontSVG, side:sideSVG, top:topSVG};
+function mountScenario(){
+  if (!CUR) return;
+  $('#prev').onclick = ()=> go(CUR.i-1);
+  $('#next').onclick = ()=> { if (CUR.i < CUR.steps.length-1) go(CUR.i+1); else location.hash = '#home'; };
+  $$('#steps li').forEach(li=> li.onclick = ()=> go(+li.dataset.i));
+  let sx = null, sy = 0;
+  const fig = $('#fig');
+  fig.addEventListener('touchstart', e=>{ sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, {passive:true});
+  fig.addEventListener('touchend', e=>{ if (sx == null) return; const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; sx = null; if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)*1.5) go(CUR.i + (dx < 0 ? 1 : -1)); }, {passive:true});
+  go(0, true);
+}
+function go(i, first){
+  const n = CUR.steps.length; i = Math.max(0, Math.min(n-1, i)); CUR.i = i;
+  const st = CUR.steps[i];
+  const fig = $('#fig');
+  if (fig.dataset.v !== st.v){ fig.innerHTML = FIGS[st.v](); fig.dataset.v = st.v; bindPanelClicks(fig); }
+  const svg = fig.querySelector('svg');
+  if (st.resetLevels){ LEVEL.scaleP = 2; LEVEL.scaleV = 2; }
+  if (st.v === 'panel') applyPanel(svg, st); else applyMachine(svg, st);
+  $('#vname').textContent = VIEW_NAME[st.v];
+  $('#vcnt').textContent = `шаг ${i+1} из ${n}`;
+  $('#capn').textContent = i+1;
+  $('#capt').innerHTML = esc(st.t) + (st.w?`<span class="sub" style="color:var(--red-3);font-weight:700">⚠ ${esc(st.w)}</span>`:'') + (st.tip?`<span class="sub">💡 ${esc(st.tip)}</span>`:'');
+  $('#prev').disabled = i===0;
+  $('#next').textContent = i===n-1 ? 'Готово ✓' : 'Дальше →';
+  $$('#steps li').forEach((li,j)=>{ li.classList.toggle('on', j===i); li.classList.toggle('done', j<i); });
+  if (!first && window.innerWidth < 980){ /* keep stage visible on phones */ const r = $('.stage').getBoundingClientRect(); if (r.top < 60 || r.top > window.innerHeight*0.5) $('.stage').scrollIntoView({behavior:'smooth', block:'start'}); }
+}
+function bindPanelClicks(root){
+  root.querySelectorAll('.pn').forEach(g=> g.addEventListener('click', ()=>{
+    const k = g.dataset.k;
+    if (k==='portion' || k==='volume'){ const sk = k==='portion'?'scaleP':'scaleV'; LEVEL[sk] = LEVEL[sk]%3+1; $$('svg.pnsvg').forEach(setScales); toast(`${k==='portion'?'Порция':'Объём'}: ${LEVEL[sk]} из 3`); }
+    else toast(PANEL[k].n + '. ' + PANEL[k].name);
+  }));
+}
+
+/* ============================================================
+   Errors page
+   ============================================================ */
+const ERRS = [
+  {lit:['nowater'], s:'Горит «Нет воды»', c:'Закончилась вода или резервуар не установлен.', f:'Снимите резервуар, долейте воды и установите его до упора.', to:'power'},
+  {lit:['nobeans'], s:'Горит «Нет зёрен»', c:'Закончился кофе в отсеке кофемолки.', f:'Засыпьте кофейные зёрна в отсек.', to:'power'},
+  {blink:['caution'], s:'Мигает «Осторожно»', c:'Боковая крышка или регулятор помола установлены неправильно.', f:'Проверьте установку боковой крышки и регулятора помола.', to:'grinderf'},
+  {lit:['caution'], s:'Горит «Осторожно»', c:'Заварочный блок или внутренний поддон не установлены или стоят неправильно.', f:'Проверьте установку заварочного блока и внутреннего поддона.', to:'brew'},
+  {lit:['grounds'], s:'Горит «Очистите осадок»', c:'Контейнер для жмыха заполнен.', f:'Очистите контейнер для жмыха.', to:'grounds'},
+  {lit:['brewdirty'], s:'Горит «Очистите завар. механизм»', c:'Нужна очистка заварочного блока.', f:'Очистите заварочный блок.', to:'brew'},
+  {lit:['brewdirty','grounds'], s:'Почистили, а индикатор всё горит', c:'Чистили, когда машина была в спящем режиме или выключена.', f:'Включите машину (режим ожидания), откройте боковую крышку, выньте контейнер для жмыха и заварочный блок на 10 секунд, верните и закройте крышку.', to:'grounds'},
+  {blink:['hotwater','clean'], s:'Мигают «Горячая вода» и «Очистка»', c:'Пора удалить накипь (≈ 500 кружек).', f:'Проведите очистку от накипи.', to:'descale'},
+  {blink:['nobeans','caution'], s:'Мигают «Нет зёрен» и «Осторожно»', c:'Кофемолка перегрелась.', f:'Выключите машину на 5 минут и включите снова. Не готовьте больше 15 чашек подряд.', to:'sleep'},
+  {blink:['hotwater','caution'], s:'Мигают «Горячая вода» и «Осторожно»', c:'Ошибка датчика пролива воды.', f:'Проверьте воду в резервуаре. Выньте вилку из розетки и перезапустите машину.', to:'power'},
+  {blink:['espresso','caution'], s:'Мигают «Эспрессо» и «Осторожно»', c:'Неправильная работа кофемолки.', f:'Отключите машину на 10–15 минут и перезапустите.', to:'sleep'},
+  {s:'Кофе льётся очень медленно', c:'Слишком мелкий помол.', f:'Увеличьте степень помола (против часовой).', to:'grind'},
+  {s:'Кофе льётся слишком быстро', c:'Слишком крупный помол.', f:'Уменьшите степень помола (по часовой).', to:'grind'},
+  {s:'Кофе слабый, нет пенки', c:'Крупный помол или неподходящие зёрна.', f:'Уменьшите степень помола; используйте зёрна для эспрессо-машин.', to:'grind'},
+  {s:'Не взбивается молочная пена', c:'Капучинатор или уплотнители собраны неправильно, или он загрязнён.', f:'Проверьте сборку и очистите капучинатор.', to:'wandclean'},
+  {s:'Не снимается заварочный блок', c:'Машину выключили неправильно, или пытаетесь снять во время работы.', f:'Соберите машину, включите, дождитесь окончания прогрева, выключите кнопкой ⏻ и дождитесь полного выключения. Затем снимайте блок.', to:'brew'},
+  {s:'Машина не включается', c:'Нет питания, вилка не в розетке или выключатель сзади в положении 0.', f:'Проверьте розетку и шнур, переведите выключатель на задней стенке в положение I.', to:'power'},
+];
+function miniInd(k, blink){ return `<span class="ii ${blink?'bl':''}" title="${esc(PANEL[k].name)}"><svg viewBox="-20 -20 40 40" style="color:#EFE2CF">${PICO[k]}</svg></span>`; }
+function renderErrors(s){
+  return `<div class="crumbs"><a class="back" href="#home">← Все разделы</a></div>
+  <div class="shead"><span class="ic">${MI[s.icon]}</span><div><h1>${esc(s.title)}</h1><p>Нажмите на значок на панели — останутся только подходящие подсказки.</p></div></div>
+  <div class="stage" style="position:relative;top:0"><div class="vt"><span>Панель управления</span><span class="cnt">индикаторы 6, 7, 8, 16, 17</span></div><div class="figbox" id="fig"></div></div>
+  <div class="filterinfo" id="finfo" hidden><span id="ftext"></span><button class="btn line sm" id="fclear">Показать все</button></div>
+  <div class="errgrid">${ERRS.map((e,i)=>`<div class="err" data-i="${i}"><div class="sym">${(e.lit||[]).map(k=>miniInd(k,false)).join('')}${(e.blink||[]).map(k=>miniInd(k,true)).join('')}<span>${esc(e.s)}</span></div><dl><dt>Причина</dt><dd>${esc(e.c)}</dd><dt>Что делать</dt><dd>${esc(e.f)}</dd></dl>${e.to?`<a class="more" href="#s-${e.to}">Схема: ${esc(SCI[e.to].title)} →</a>`:''}</div>`).join('')}</div>
+  <div class="warnbox" style="margin-top:18px"><span class="wi">!</span><span>Не получилось устранить самостоятельно — обратитесь в службу поддержки или авторизованный сервисный центр. Не ремонтируйте машину сами.</span></div>`;
+}
+function mountErrors(){
+  const fig = $('#fig'); fig.innerHTML = panelSVG(); const svg = fig.querySelector('svg');
+  const IND = ['nobeans','brewdirty','nowater','caution','grounds','hotwater','clean','espresso'];
+  const show = k => {
+    applyPanel(svg, {lit:'all', on: k?[k]:['nobeans','brewdirty','nowater','caution','grounds'], hi: k?[k+':выбрано']:[]});
+    $$('.err').forEach(el=>{ const e = ERRS[+el.dataset.i]; const ks = [...(e.lit||[]),...(e.blink||[])]; el.classList.toggle('hide', !!k && !ks.includes(k)); });
+    $('#finfo').hidden = !k; if (k) $('#ftext').textContent = 'Фильтр: ' + PANEL[k].name;
+  };
+  svg.querySelectorAll('.pn').forEach(g=> g.addEventListener('click', ()=>{ const k=g.dataset.k; if (IND.includes(k)) show(k); else toast(PANEL[k].n+'. '+PANEL[k].name); }));
+  $('#fclear').onclick = ()=> show(null);
+  show(null);
+}
+
+/* ============================================================
+   Parts page
+   ============================================================ */
+const PARTS13 = [
+  [1,'Крышка отсека для зёрен','front','lid'],[2,'Резервуар для воды','front','tank'],[3,'Регулятор степени помола','top','dial'],
+  [4,'Панель управления','front','panelzone'],[5,'Дозатор кофе','front','spout'],[6,'Капучинатор','front','wand'],
+  [7,'Контейнер для жмыха','side','grounds'],[8,'Решётка поддона','front','grate'],[9,'Поддон для капель','front','tray'],
+  [10,'Щёточка для очистки','side','brush'],[11,'Заварочный блок','side','brew'],[12,'Крышка боковая','side','door'],[13,'Шнур электропитания','front','cord'],
+];
+const SPECS = [['Мощность','1350 Вт'],['Напряжение','220–240 В~, 50 Гц'],['Давление','20 бар (2 МПа)'],['Резервуар для воды','1,5 л'],['Загрузка кофемолки','до 180 г зёрен'],['Помол','металлические жернова, 15 степеней'],['Нагреватель','термоблок'],['Автоматических программ','5'],['Автоотключение','через 28 мин бездействия'],['Размеры (Ш×В×Г)','437 × 183 × 320 мм'],['Вес','8,5 кг'],['Шнур','1 м'],['Гарантия / срок службы','12 мес. / 3 года']];
+function renderParts(s){
+  return `<div class="crumbs"><a class="back" href="#home">← Все разделы</a></div>
+  <div class="shead"><span class="ic">${MI[s.icon]}</span><div><h1>${esc(s.title)}</h1><p>Нажмите на название — деталь подсветится на схеме.</p></div></div>
+  <div class="splay">
+    <div class="stage"><div class="tabs" id="vtabs"><button data-v="front" class="on">Спереди</button><button data-v="side">Сбоку</button><button data-v="top">Сверху</button><button data-v="panel">Панель</button></div><div class="figbox" id="fig"></div></div>
+    <div>
+      <div class="sect" style="margin-top:0"><h2>Детали</h2></div>
+      <ul class="legend" id="lg1">${PARTS13.map(([n,t,v,id])=>`<li data-v="${v}" data-id="${id}"><span class="k">${n}</span>${esc(t)}</li>`).join('')}</ul>
+      <div class="sect"><h2>Панель управления</h2></div>
+      <ul class="legend" id="lg2">${Object.entries(PANEL).sort((a,b)=>a[1].n-b[1].n).map(([k,p])=>`<li data-v="panel" data-id="${k}"><span class="k" style="background:var(--nero)">${p.n}</span>${esc(p.name)}</li>`).join('')}</ul>
+    </div>
+  </div>
+  <div class="sect"><h2>Характеристики</h2><span>комплект: машина, щёточка, инструкция, гарантийный талон</span></div>
+  <table class="spec">${SPECS.map(([a,b])=>`<tr><td>${esc(a)}</td><td><b>${esc(b)}</b></td></tr>`).join('')}</table>`;
+}
+function mountParts(){
+  const fig = $('#fig');
+  const show = (v, id) => {
+    if (fig.dataset.v !== v){ fig.innerHTML = FIGS[v](); fig.dataset.v = v; if (v==='panel') bindPanelClicks(fig); }
+    const svg = fig.querySelector('svg');
+    if (v==='panel') applyPanel(svg, {lit:'all', on:['nobeans','brewdirty','nowater','caution','grounds'], hi: id?[id+':'+PANEL[id].n]:[]});
+    else applyMachine(svg, {hi: id?[id]:[], show: id==='brush'?['brush']:[]});
+    $$('#vtabs button').forEach(b=> b.classList.toggle('on', b.dataset.v===v));
+    $$('.legend li').forEach(li=> li.classList.toggle('on', li.dataset.id===id && li.dataset.v===v));
+  };
+  $$('#vtabs button').forEach(b=> b.onclick = ()=> show(b.dataset.v, null));
+  $$('.legend li').forEach(li=> li.onclick = ()=> { show(li.dataset.v, li.dataset.id); if (window.innerWidth<980) $('.stage').scrollIntoView({behavior:'smooth'}); });
+  show('front', null);
+}
+
+/* ============================================================
+   SERVICE / maintenance calendar
+   ============================================================ */
+/* ======================= НАСТРОЙКА SUPABASE =======================
+   Вставьте сюда Project URL и ключ anon public из
+   Supabase → Project Settings → API (Data API / API Keys).
+   Ключ anon можно хранить в коде страницы: доступ защищают правила
+   из supabase-setup.sql. НИКОГДА не вставляйте сюда ключ service_role.
+   Оставьте поля пустыми, чтобы работать без Supabase.
+   На claude.ai страница всегда использует собственное хранилище:
+   оттуда Supabase недоступен. */
+const SB_CONFIG = {
+  url: '',      // например: 'https://abcdefghijkl.supabase.co'
+  anonKey: '',  // длинная строка, начинается с 'eyJ…' или 'sb_publishable_…'
+};
+const SB_BUCKET = 'coffee';
+const SB_LIB = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js';
+/* =================================================================== */
+const STORE_KEY = 'wcm230-service-v1';
+const PASTELS = ['#F8C8DC','#FFD6A5','#FDF3B0','#CAFFBF','#B9F2F0','#A0C4FF','#BDB2FF','#FFC6FF','#D4E6B5','#F1C0B9','#C9E4DE','#E2CFEA','#FFE5EC','#D7E3FC','#FAE1C3','#C7CEEA'];
+const EMOJIS = ['🦊','🐻','🐼','🐨','🐯','🦁','🐸','🐙','🦄','🐝','🦉','🐢','🐳','🦋','🌵','🌻','🍒','🍋','🫐','🥐','🍩','💎','🌈','⭐️','🚀','🎧','🧁','🐧','🦔'];
+const TASKS = [
+  ['Кронштейн заварочного блока','bracket'],['Полная очистка кофемолки','grinderf'],['Заварочный блок','brew'],
+  ['Очистка от накипи','descale'],['Закупка кофе',null],['Другое',null],
+];
+const TASKMAP = Object.fromEntries([...TASKS, ['Самоочистка дозатора','clean'],['Чистка капучинатора','wandclean'],['Поддон для капель','tray'],['Контейнер для жмыха','grounds'],['Быстрая очистка кофемолки','grinderq']]);
+/* Shared store: the artifact's db when published, this browser's storage when opened as a file */
+let DB = {people:[], events:[], coffees:[], auth:[]};
+let STORE = null, STORE_STATE = 'loading';
+function localLoad(){ try{ const j = JSON.parse(localStorage.getItem(STORE_KEY)); if (j && Array.isArray(j.people) && Array.isArray(j.events)) return {coffees:[], auth:[], ...j}; }catch(e){} return {people:[], events:[], coffees:[], auth:[]}; }
+function localSave(){ try{ localStorage.setItem(STORE_KEY, JSON.stringify(DB)); }catch(e){ toast('Не хватило места в браузере — удалите старые фото'); } }
+const STATUS = {
+  loading:['Загружаю общий график…',''], live:['● Общий график — изменения сразу видят все',''],
+  local:['График хранится только в этом браузере',''], slow:['Общий график пока не отвечает — данные могут быть устаревшими','warn'],
+  error:['Общий график недоступен — обновите страницу позже','warn'],
+  sblive:['● Общий график (Supabase) — изменения сразу видят все',''],
+  sberror:['Не удалось подключиться к Supabase — проверьте настройки в коде и интернет','warn'],
+};
+function setStatus(){ const el = $('#svstat'); if(!el) return; const [t,c] = STATUS[STORE_STATE]; el.textContent = t; el.className = 'svstat '+c; }
+function redrawService(){ if ($('#service')){ drawService(); setStatus(); } }
+const byCreated = (a,b)=> (a.created||0)-(b.created||0) || String(a.id).localeCompare(String(b.id));
+async function initStore(){
+  let db = null;
+  const inClaude = !!(window.claude && window.claude.use);
+  try{ db = inClaude ? await window.claude.use('db') : null; }catch(e){ db = null; }
+  if (!db && !inClaude && SB_CONFIG.url && SB_CONFIG.anonKey) return initSupabase();
+  if (!db){ STORE_STATE = 'local'; DB = localLoad(); AUTH_LOADED = true; syncLogin(); redrawService(); return; }
+  STORE = db;
+  const got = {people:false, events:false, coffees:false};
+  const timer = setTimeout(()=>{ if (STORE_STATE==='loading'){ STORE_STATE='slow'; setStatus(); } }, 10000);
+  const sub = coll => db.collection(coll).onSnapshot(snap=>{
+    DB[coll] = snap.docs.map(d=>({...d.data(), id:d.id})).sort(byCreated);
+    if (coll === 'auth'){ if (!snap.metadata.fromCache) AUTH_LOADED = true; syncLogin(); }
+    if (!snap.metadata.fromCache && !got[coll]){ got[coll] = true; if (got.people && got.events && got.coffees){ clearTimeout(timer); STORE_STATE='live'; } }
+    redrawService();
+  }, ()=>{ clearTimeout(timer); STORE_STATE='error'; setStatus(); });
+  sub('people'); sub('events'); sub('coffees'); sub('auth');
+}
+/* --- who may edit: Editors and the owner (db rule write:"admin") --- */
+let USER = null, ASSETS = null;
+let AUTH = {ready:false, platformEdit:false, edit:false, local:false, id:null};
+/* Editing needs BOTH: the platform's Editor role (enforced by the server's db rules)
+   and a sign-in with e-mail + password (accounts in the "auth" collection, readable only by editors). */
+let LOGIN = null, LOGIN_MEM = null, AUTH_LOADED = false;
+const SESS_KEY = 'wcm230-login', ITER = 150000;
+async function initAuth(){
+  if (MODE === 'supabase') return;
+  let u = null;
+  try{ u = window.claude && window.claude.use ? await window.claude.use('user') : null; }catch(e){ u = null; }
+  USER = u;
+  if (!u) AUTH = {ready:true, platformEdit:!STORE, edit:false, local:!STORE, id:null};
+  else { const me = await u.me(); AUTH = {ready:true, platformEdit:!!me.canEdit, edit:false, local:false, id:me.id}; }
+  if (AUTH.platformEdit && STORE){ try{ ASSETS = await window.claude.use('assets'); }catch(e){ ASSETS = null; } }
+  syncLogin(); redrawService();
+}
+function sessGet(){ try{ return JSON.parse(sessionStorage.getItem(SESS_KEY)); }catch(e){ return null; } }
+function sessSet(v){ try{ v ? sessionStorage.setItem(SESS_KEY, JSON.stringify(v)) : sessionStorage.removeItem(SESS_KEY); }catch(e){} }
+function syncLogin(){
+  if (MODE === 'supabase') return;
+  const ss = LOGIN_MEM || sessGet();
+  const r = ss && (DB.auth||[]).find(a=> a.id === ss.email);
+  LOGIN = (r && r.hash && r.hash.slice(0,16) === ss.sig) ? {email:r.id, name:r.name || r.id, role:r.role || 'editor'} : null;
+  AUTH.edit = AUTH.ready && AUTH.platformEdit && !!LOGIN;
+}
+function doLogin(r){ LOGIN_MEM = {email:r.id, sig:r.hash.slice(0,16)}; sessSet(LOGIN_MEM); syncLogin(); redrawService(); }
+function doLogout(){ LOGIN_MEM = null; sessSet(null); syncLogin(); redrawService(); toast('Вы вышли'); }
+const b64 = buf => btoa(String.fromCharCode(...new Uint8Array(buf)));
+const unb64 = t => Uint8Array.from(atob(t), c=> c.charCodeAt(0));
+function newSalt(){ const a = new Uint8Array(16); crypto.getRandomValues(a); return b64(a); }
+async function hashPw(pw, salt, iter){
+  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveBits']);
+  return b64(await crypto.subtle.deriveBits({name:'PBKDF2', hash:'SHA-256', salt:unb64(salt), iterations:iter}, key, 256));
+}
+async function makeAccount(email, name, pw, role, base){ const salt = newSalt(); return {...(base||{}), id:email, name, role, salt, hash: await hashPw(pw, salt, ITER), iter:ITER, created:(base && base.created) || Date.now()}; }
+const emailKey = e => String(e||'').trim().toLowerCase();
+const validEmail = e => /^[a-z0-9._+-]+@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}$/.test(e) && e.length <= 120;
+function pwProblem(pw, pw2){ if (pw.length < 8) return 'Пароль — минимум 8 символов'; if (pw2 != null && pw !== pw2) return 'Пароли не совпадают'; return ''; }
+const roleName = r => r === 'admin' ? 'администратор' : r === 'viewer' ? 'только просмотр' : 'редактор';
+
+function drawAuth(){
+  const el = $('#svauth'); if (!el) return;
+  $('#addPerson').hidden = !AUTH.edit; $('#addCoffee').hidden = !AUTH.edit;
+  el.className = 'svauth';
+  if (MODE === 'supabase') return drawAuthSb(el);
+  const loc = AUTH.local ? '<span class="byline" style="flex-basis:100%">💻 Локальный режим: аккаунты и график хранятся только в этом браузере</span>' : '';
+  if (!AUTH.ready){ el.textContent = 'Проверяю права доступа…'; return; }
+  if (!AUTH.platformEdit){
+    el.classList.add('ro');
+    el.textContent = '🔒 Только просмотр. Вносить изменения могут только редакторы с аккаунтом (почта и пароль). Попросите владельца страницы выдать вам роль «Редактор» (Share → Editor), а администратора графика — создать вам аккаунт.';
+    return;
+  }
+  if (!LOGIN){
+    if (!AUTH_LOADED){ el.innerHTML = `<span>🔑 Загружаю аккаунты…</span>${loc}`; return; }
+    const first = !(DB.auth||[]).length;
+    el.innerHTML = `<span>🔑 ${first ? 'Аккаунтов ещё нет. Создайте первый — аккаунт администратора, чтобы вносить изменения.' : 'Чтобы вносить изменения, войдите по почте и паролю.'}</span><span class="sp" style="flex:1"></span><button type="button" class="btn red sm" id="loginBtn">${first ? 'Создать аккаунт' : 'Войти'}</button>${loc}`;
+    $('#loginBtn').onclick = ()=> openLogin();
+    return;
+  }
+  el.innerHTML = `<span>👤 <b class="nm"></b> <span class="byline em"></span> · ${roleName(LOGIN.role)} · ✏️ можно вносить изменения</span><span class="sp" style="flex:1"></span>${LOGIN.role==='admin' ? '<button type="button" class="btn line sm" id="accBtn">Аккаунты</button>' : ''}<button type="button" class="btn line sm" id="pwBtn">Сменить пароль</button><button type="button" class="btn line sm" id="outBtn">Выйти</button>${loc}`;
+  el.querySelector('.nm').textContent = LOGIN.name; el.querySelector('.em').textContent = LOGIN.email;
+  if ($('#accBtn')) $('#accBtn').onclick = openAccounts;
+  $('#pwBtn').onclick = openChangePw;
+  $('#outBtn').onclick = doLogout;
+}
+
+let FAILS = 0, LOCK_UNTIL = 0;
+function openLogin(){
+  if (!AUTH.platformEdit || !AUTH_LOADED) return;
+  const first = !(DB.auth||[]).length;
+  const dlg = $('#dlg');
+  dlg.innerHTML = `<form class="dlg" id="lf" novalidate><button class="x" type="button" data-close aria-label="Закрыть">✕</button>
+    <h3>${first ? 'Первый аккаунт — администратор' : 'Вход для редакторов'}</h3>
+    <p class="subt">${first ? 'Администратор потом добавляет аккаунты остальным и сбрасывает пароли.' : 'Нет аккаунта или забыли пароль — обратитесь к администратору графика.'}</p>
+    ${first ? `<div class="field"><label for="lName">Имя (видно в графике)</label><input class="inp" id="lName" autocomplete="name"></div>` : ''}
+    <div class="field"><label for="lEmail">Почта</label><input class="inp" id="lEmail" type="email" inputmode="email" autocomplete="username" placeholder="name@example.com"></div>
+    <div class="field"><label for="lPw">Пароль</label><input class="inp" id="lPw" type="password" autocomplete="${first ? 'new-password' : 'current-password'}"></div>
+    ${first ? `<div class="field"><label for="lPw2">Пароль ещё раз</label><input class="inp" id="lPw2" type="password" autocomplete="new-password"></div>` : ''}
+    <div class="msg" id="lMsg" role="alert"></div>
+    <div class="dfoot"><button type="button" class="btn line sm" data-close>Отмена</button><button type="submit" class="btn red sm" id="lGo">${first ? 'Создать и войти' : 'Войти'}</button></div></form>`;
+  bindClose(dlg);
+  $('#lf').onsubmit = async ev => {
+    ev.preventDefault();
+    const msg = $('#lMsg'); msg.textContent = '';
+    const email = emailKey($('#lEmail').value), pw = $('#lPw').value;
+    if (!validEmail(email)){ msg.textContent = 'Введите почту в формате name@example.com'; return; }
+    const go = $('#lGo'); go.disabled = true;
+    try{
+      if (first){
+        const name = $('#lName').value.trim(); if (!name){ msg.textContent = 'Введите имя'; return; }
+        const pr = pwProblem(pw, $('#lPw2').value); if (pr){ msg.textContent = pr; return; }
+        if ((DB.auth||[]).length){ msg.textContent = 'Аккаунт уже создан кем-то другим — войдите'; return; }
+        const rec = await makeAccount(email, name, pw, 'admin');
+        DB.auth = [...(DB.auth||[]), rec];
+        if (!(await put('auth', rec))){ DB.auth = DB.auth.filter(a=> a !== rec); return; }
+        doLogin(rec); dlg.close(); toast('Аккаунт создан, вы вошли');
+        return;
+      }
+      if (Date.now() < LOCK_UNTIL){ msg.textContent = `Слишком много попыток. Подождите ${Math.ceil((LOCK_UNTIL-Date.now())/1000)} с`; return; }
+      const r = (DB.auth||[]).find(a=> a.id === email);
+      const h = await hashPw(pw, r ? r.salt : newSalt(), r ? (r.iter||ITER) : ITER);
+      if (!r || h !== r.hash){ FAILS++; if (FAILS >= 5){ FAILS = 0; LOCK_UNTIL = Date.now() + 30000; } msg.textContent = 'Неверная почта или пароль'; return; }
+      FAILS = 0; doLogin(r); dlg.close(); toast('Вы вошли как ' + (r.name || r.id));
+    } finally { go.disabled = false; }
+  };
+  dlg.showModal(); setTimeout(()=> ($('#lName') || $('#lEmail')).focus(), 30);
+}
+function openChangePw(){
+  if (!LOGIN) return;
+  const dlg = $('#dlg');
+  dlg.innerHTML = `<form class="dlg" id="cpf" novalidate><button class="x" type="button" data-close aria-label="Закрыть">✕</button>
+    <h3>Сменить пароль</h3><p class="subt"></p>
+    <input type="email" autocomplete="username" hidden id="cpUser">
+    <div class="field"><label for="cpOld">Текущий пароль</label><input class="inp" id="cpOld" type="password" autocomplete="current-password"></div>
+    <div class="field"><label for="cpNew">Новый пароль</label><input class="inp" id="cpNew" type="password" autocomplete="new-password"></div>
+    <div class="field"><label for="cpNew2">Новый пароль ещё раз</label><input class="inp" id="cpNew2" type="password" autocomplete="new-password"></div>
+    <div class="msg" id="cpMsg" role="alert"></div>
+    <div class="dfoot"><button type="button" class="btn line sm" data-close>Отмена</button><button type="submit" class="btn red sm" id="cpGo">Сохранить</button></div></form>`;
+  dlg.querySelector('.subt').textContent = LOGIN.email; $('#cpUser').value = LOGIN.email;
+  bindClose(dlg);
+  $('#cpf').onsubmit = async ev => {
+    ev.preventDefault(); const msg = $('#cpMsg'); msg.textContent = '';
+    const r = (DB.auth||[]).find(a=> a.id === LOGIN.email); if (!r) return;
+    if ((await hashPw($('#cpOld').value, r.salt, r.iter||ITER)) !== r.hash){ msg.textContent = 'Текущий пароль неверный'; return; }
+    const pr = pwProblem($('#cpNew').value, $('#cpNew2').value); if (pr){ msg.textContent = pr; return; }
+    const rec = await makeAccount(r.id, r.name, $('#cpNew').value, r.role, r);
+    DB.auth = DB.auth.map(a=> a.id === r.id ? rec : a);
+    if (await put('auth', rec)){ doLogin(rec); dlg.close(); toast('Пароль изменён'); }
+  };
+  dlg.showModal(); setTimeout(()=> $('#cpOld').focus(), 30);
+}
+function openAccounts(){
+  if (!LOGIN || LOGIN.role !== 'admin') return;
+  const dlg = $('#dlg');
+  const draw = () => {
+    const list = [...(DB.auth||[])].sort(byCreated);
+    const admins = list.filter(a=> a.role === 'admin').length;
+    dlg.innerHTML = `<form class="dlg" id="af" novalidate><button class="x" type="button" data-close aria-label="Закрыть">✕</button>
+      <h3>Аккаунты редакторов</h3><p class="subt">Войти и вносить изменения может только тот, у кого есть аккаунт здесь и роль «Редактор» в Share.</p>
+      <div id="accList">${list.map(a=>`<div class="dentry" data-acc="${esc(a.id)}"><span class="who" style="background:var(--blue-2)">${a.role==='admin'?'🛡':'👤'}</span><span class="tx"><b></b><span class="byline"></span></span>
+        <button type="button" class="btn line sm" data-reset="${esc(a.id)}">Пароль</button>${a.id===LOGIN.email || (a.role==='admin' && admins<=1) ? '' : `<button type="button" class="del" data-adel="${esc(a.id)}" title="Удалить аккаунт" aria-label="Удалить аккаунт">✕</button>`}</div>
+        <div class="newp" data-resetbox="${esc(a.id)}" hidden style="margin:0 0 8px"><div class="field" style="margin:0"><label>Новый пароль для этого аккаунта</label><div class="hexrow" style="margin:0"><input class="inp" type="password" autocomplete="new-password" data-newpw style="max-width:none"><button type="button" class="btn red sm" data-setpw="${esc(a.id)}">Сохранить</button></div></div></div>`).join('')}</div>
+      <h3 style="font-size:15px;margin-top:16px">Добавить аккаунт</h3>
+      <div class="field"><label for="aName">Имя (видно в графике)</label><input class="inp" id="aName" autocomplete="off"></div>
+      <div class="field"><label for="aEmail">Почта</label><input class="inp" id="aEmail" type="email" inputmode="email" autocomplete="off" placeholder="name@example.com"></div>
+      <div class="field"><label for="aPw">Временный пароль (сообщите человеку, он сменит его сам)</label><input class="inp" id="aPw" type="password" autocomplete="new-password"></div>
+      <div class="field"><label for="aRole">Роль</label><select class="inp" id="aRole"><option value="editor">Редактор — вносит изменения</option><option value="admin">Администратор — ещё и управляет аккаунтами</option></select></div>
+      <div class="msg" id="aMsg" role="alert"></div>
+      <div class="dfoot"><button type="button" class="btn line sm" data-close>Закрыть</button><button type="submit" class="btn red sm">Добавить аккаунт</button></div></form>`;
+    list.forEach(a=>{ const row = dlg.querySelector(`[data-acc="${CSS.escape(a.id)}"]`); row.querySelector('b').textContent = a.name || a.id; row.querySelector('.byline').textContent = a.id + ' · ' + roleName(a.role) + (a.id === LOGIN.email ? ' · это вы' : ''); });
+    bindClose(dlg);
+    $$('[data-reset]', dlg).forEach(b=> b.onclick = ()=>{ const box = dlg.querySelector(`[data-resetbox="${CSS.escape(b.dataset.reset)}"]`); box.hidden = !box.hidden; if (!box.hidden) box.querySelector('input').focus(); });
+    $$('[data-setpw]', dlg).forEach(b=> b.onclick = async ()=>{
+      const id = b.dataset.setpw; const box = dlg.querySelector(`[data-resetbox="${CSS.escape(id)}"]`); const pw = box.querySelector('input').value;
+      const pr = pwProblem(pw); if (pr){ $('#aMsg').textContent = pr; return; }
+      const r = DB.auth.find(a=> a.id === id); if (!r) return;
+      const rec = await makeAccount(r.id, r.name, pw, r.role, r);
+      DB.auth = DB.auth.map(a=> a.id === id ? rec : a);
+      if (await put('auth', rec)){ if (id === LOGIN.email) doLogin(rec); toast('Пароль изменён'); draw(); }
+    });
+    $$('[data-adel]', dlg).forEach(b=> b.onclick = async ()=>{
+      if (!b.dataset.arm){ b.dataset.arm = '1'; b.textContent = 'Удалить?'; b.style.width = 'auto'; b.style.padding = '0 10px'; return; }
+      const id = b.dataset.adel; DB.auth = DB.auth.filter(a=> a.id !== id); await del('auth', id); toast('Аккаунт удалён'); draw();
+    });
+    $('#af').onsubmit = async ev => {
+      ev.preventDefault(); const msg = $('#aMsg'); msg.textContent = '';
+      const name = $('#aName').value.trim(), email = emailKey($('#aEmail').value), pw = $('#aPw').value, role = $('#aRole').value;
+      if (!name){ msg.textContent = 'Введите имя'; return; }
+      if (!validEmail(email)){ msg.textContent = 'Введите почту в формате name@example.com'; return; }
+      if ((DB.auth||[]).some(a=> a.id === email)){ msg.textContent = 'Аккаунт с такой почтой уже есть'; return; }
+      const pr = pwProblem(pw); if (pr){ msg.textContent = pr; return; }
+      const rec = await makeAccount(email, name, pw, role);
+      DB.auth = [...(DB.auth||[]), rec];
+      if (await put('auth', rec)){ toast('Аккаунт добавлен'); draw(); }
+    };
+  };
+  draw();
+  dlg.showModal();
+}
+async function fillNames(root){
+  const spans = $$('.byname[data-uid]', root); if (!spans.length || !USER) return;
+  const ps = await USER.profiles([...new Set(spans.map(s=>s.dataset.uid))]);
+  spans.forEach(s=>{ const p = ps[s.dataset.uid]; s.textContent = (p && p.name) ? 'добавил(а): ' + p.name : ''; });
+}
+const byHTML = (id, nm) => nm ? `<span class="byline">добавил(а): ${esc(nm)}</span>` : id ? `<span class="byline byname" data-uid="${esc(id)}"></span>` : '';
+
+/* --- coffee packs --- */
+const grindWord = g => g<=4 ? 'мелкий помол' : g<=10 ? 'средний помол' : 'крупный помол';
+function grindDial(g){
+  const ticks = Array.from({length:15},(_,i)=>{const a=(-140+i*20)*Math.PI/180;return `<circle cx="${(24+18*Math.sin(a)).toFixed(1)}" cy="${(24-18*Math.cos(a)).toFixed(1)}" r="${i+1===g?2.6:1.2}" fill="${i+1===g?'#F2A93B':'#8a7f7a'}"/>`}).join('');
+  const a = (-140+(g-1)*20);
+  return `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="23" fill="#3a3233"/>${ticks}<circle cx="24" cy="24" r="11" fill="#141011"/><path d="M24 24 L24 9" stroke="#F2A93B" stroke-width="3" stroke-linecap="round" transform="rotate(${a} 24 24)"/></svg>`;
+}
+const coffeeSrc = c => c.img ? (MODE === 'supabase' && SB ? SB.storage.from(SB_BUCKET).getPublicUrl(c.img).data.publicUrl : '/_blob/' + c.img) : (c.imgData || '');
+function fmtDate(k){ if(!k) return ''; const d = parseKey(k); return `${d.getDate()} ${MONTHS_G[d.getMonth()]} ${d.getFullYear()}`; }
+function drawCoffees(){
+  const el = $('#coffees'); if (!el) return;
+  const list = [...(DB.coffees||[])].sort((a,b)=> (b.created||0)-(a.created||0));
+  if (!list.length){ el.innerHTML = `<div class="cfempty">Пока нет ни одной пачки. ${AUTH.edit?'Нажмите «＋ Пачка кофе», добавьте фото и укажите степень помола (1–15).':'Здесь появятся фото пачек и степень помола для каждой.'}</div>`; return; }
+  el.innerHTML = list.map(c=>{ const src = coffeeSrc(c); const g = Math.min(15, Math.max(1, +c.grind||8)); return `<article class="cf">
+    <div class="ph">${src?`<img src="${esc(src)}" alt="${esc(c.name)}" loading="lazy">`:'<div class="noimg">☕</div>'}</div>
+    <div class="cb"><b>${esc(c.name)}</b>
+      <div class="gr">${grindDial(g)}<span><em>${g}</em> из 15<br><small>${grindWord(g)}</small></span></div>
+      ${c.note?`<p>${esc(c.note)}</p>`:''}
+      <span class="byline">${c.opened?'Открыта: '+fmtDate(c.opened):''}</span>${byHTML(c.by, c.byName)}
+      ${AUTH.edit?`<div class="acts"><button class="btn line sm" data-cedit="${c.id}">Изменить</button></div>`:''}
+    </div></article>`; }).join('');
+  $$('[data-cedit]', el).forEach(b=> b.onclick = ()=> openCoffee(b.dataset.cedit));
+  $$('.ph img', el).forEach(im=> im.addEventListener('error', ()=>{ const d = document.createElement('div'); d.className = 'noimg'; d.textContent = '☕'; im.replaceWith(d); }));
+  fillNames(el);
+}
+function shrink(file, max, q){
+  return new Promise((res, rej)=>{
+    const url = URL.createObjectURL(file); const im = new Image();
+    im.onload = ()=>{ const k = Math.min(1, max/Math.max(im.width, im.height)); const c = document.createElement('canvas'); c.width = Math.round(im.width*k); c.height = Math.round(im.height*k); const x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0,0,c.width,c.height); x.drawImage(im,0,0,c.width,c.height); URL.revokeObjectURL(url); c.toBlob(b=> b ? res(b) : rej(new Error('blob')), 'image/jpeg', q); };
+    im.onerror = ()=>{ URL.revokeObjectURL(url); rej(new Error('img')); };
+    im.src = url;
+  });
+}
+const blobToDataURL = b => new Promise((res, rej)=>{ const r = new FileReader(); r.onload = ()=> res(r.result); r.onerror = rej; r.readAsDataURL(b); });
+function openCoffee(id){
+  if (!AUTH.edit) return;
+  const c = id ? (DB.coffees||[]).find(x=>x.id===id) : null;
+  const st = {file:null, grind: c ? (+c.grind||8) : 8};
+  const canPhoto = AUTH.local || !!ASSETS;
+  const dlg = $('#dlg'); const src = c ? coffeeSrc(c) : '';
+  dlg.innerHTML = `<form class="dlg" id="cff"><button class="x" type="button" data-close aria-label="Закрыть">✕</button>
+    <h3>${c?'Пачка кофе':'Новая пачка кофе'}</h3><p class="subt">Фото пачки и степень помола, на которой этот кофе получается лучше всего.</p>
+    <div class="field"><label for="cfFile">Фото (PNG или JPEG)</label>
+      <div class="phpick"><span class="pv2" id="cfPv">${src?`<img src="${esc(src)}" alt="">`:'☕'}</span>
+      ${canPhoto?`<input type="file" id="cfFile" accept="image/png,image/jpeg">`:`<span class="byline">Загрузка фото недоступна в этом окне.</span>`}</div><div class="msg" id="cfFileMsg"></div></div>
+    <div class="field"><label for="cfName">Название</label><input class="inp" id="cfName" value="${esc(c?.name||'')}" placeholder="Например, Эфиопия Иргачеффе, 1 кг" autocomplete="off"><div class="msg" id="cfNameMsg"></div></div>
+    <div class="field"><label for="cfGrind">Степень помола (1 — мелкий, 15 — крупный)</label>
+      <div class="grrow"><input type="range" id="cfGrind" min="1" max="15" step="1" value="${st.grind}"><span class="gbig"><span id="cfGv">${st.grind}</span><small id="cfGw">${grindWord(st.grind)}</small></span></div>
+      <span class="byline">Регулятор внутри отсека для зёрен. Меняйте только во время работы кофемолки — <a href="#s-grind" data-close>схема →</a></span></div>
+    <div class="field"><label for="cfOpened">Дата вскрытия пачки</label><input class="inp" type="date" id="cfOpened" value="${esc(c?.opened || dkey(new Date()))}"></div>
+    <div class="field"><label for="cfNote">Заметки</label><input class="inp" id="cfNote" value="${esc(c?.note||'')}" placeholder="обжарка, вкус, где покупали" autocomplete="off"></div>
+    <div class="dfoot">${c?`<button type="button" class="btn line sm" id="cfDel" style="margin-right:auto;color:var(--red-3)">Удалить</button>`:''}<button type="button" class="btn line sm" data-close>Отмена</button><button type="submit" class="btn red sm" id="cfSave">Сохранить</button></div></form>`;
+  bindClose(dlg);
+  const g = $('#cfGrind');
+  g.oninput = ()=>{ st.grind = +g.value; $('#cfGv').textContent = g.value; $('#cfGw').textContent = grindWord(st.grind); };
+  if ($('#cfFile')) $('#cfFile').onchange = e => {
+    const f = e.target.files[0]; const msg = $('#cfFileMsg'); msg.textContent = '';
+    if (!f){ st.file = null; return; }
+    if (!/^image\/(png|jpeg)$/.test(f.type)){ msg.textContent = 'Подойдёт только PNG или JPEG'; e.target.value=''; st.file = null; return; }
+    st.file = f; const u = URL.createObjectURL(f); $('#cfPv').innerHTML = ''; const im = document.createElement('img'); im.src = u; im.alt = ''; $('#cfPv').appendChild(im);
+  };
+  if (c) $('#cfDel').onclick = ()=>{
+    const b = $('#cfDel'); if (!b.dataset.arm){ b.dataset.arm = '1'; b.textContent = 'Точно удалить пачку?'; return; }
+    DB.coffees = DB.coffees.filter(x=>x.id!==c.id); del('coffees', c.id);
+    if (c.img && ASSETS) ASSETS.delete(c.img).catch(()=>{});
+    dlg.close(); drawService(); toast('Пачка удалена');
+  };
+  $('#cff').onsubmit = async ev => {
+    ev.preventDefault();
+    const name = $('#cfName').value.trim(); if (!name){ $('#cfNameMsg').textContent = 'Введите название'; return; }
+    const save = $('#cfSave'); save.disabled = true; save.textContent = 'Сохраняю…';
+    const rec = {...(c||{}), id: c ? c.id : uid(), name, grind: st.grind, opened: $('#cfOpened').value, note: $('#cfNote').value.trim()};
+    if (!c){ rec.created = Date.now(); rec.by = AUTH.id || null; rec.byName = LOGIN ? LOGIN.name : null; }
+    const oldImg = c && c.img;
+    try{
+      if (st.file){
+        if (AUTH.local){ rec.imgData = await blobToDataURL(await shrink(st.file, 640, .8)); }
+        else { const up = await ASSETS.upload(await shrink(st.file, 1400, .85), {type:'image/jpeg'}); rec.img = up.id; delete rec.imgData; }
+      }
+    }catch(e){
+      save.disabled = false; save.textContent = 'Сохранить';
+      const code = e && e.code;
+      $('#cfFileMsg').textContent = code==='too_large' ? 'Фото слишком большое' : code==='quota_or_state' ? 'Место для фото закончилось — удалите старые пачки' : code==='rate_limited' ? 'Слишком часто — попробуйте через минуту' : 'Не удалось загрузить фото — попробуйте ещё раз';
+      return;
+    }
+    DB.coffees = c ? DB.coffees.map(x=> x.id===c.id ? rec : x) : [...(DB.coffees||[]), rec];
+    const ok = await put('coffees', rec);
+    if (ok && oldImg && rec.img !== oldImg && ASSETS) ASSETS.delete(oldImg).catch(()=>{});
+    dlg.close(); drawService(); toast(c ? 'Сохранено' : 'Пачка добавлена');
+  };
+  dlg.showModal();
+}
+
+/* ======================= SUPABASE ======================= */
+let MODE = 'auto', SB = null;
+const SB_TABLES = ['people','events','coffees'];
+function loadScript(src){ return new Promise((res, rej)=>{ const sc = document.createElement('script'); sc.src = src; sc.onload = res; sc.onerror = rej; document.head.appendChild(sc); }); }
+const toRow = (t, o) => t === 'people' ? {id:o.id, name:o.name, color:o.color, emoji:o.emoji, created:o.created || Date.now()}
+  : t === 'events' ? {id:o.id, date:o.date, person_id:o.personId, task:o.task, note:o.note || '', done:!!o.done, created:o.created || Date.now(), by_name:o.byName || null}
+  : {id:o.id, name:o.name, grind:+o.grind, opened:o.opened || null, note:o.note || '', img:o.img || null, created:o.created || Date.now(), by_name:o.byName || null};
+const fromRow = (t, r) => t === 'people' ? {id:r.id, name:r.name, color:r.color, emoji:r.emoji, created:+r.created || 0}
+  : t === 'events' ? {id:r.id, date:r.date, personId:r.person_id, task:r.task, note:r.note || '', done:!!r.done, created:+r.created || 0, byName:r.by_name}
+  : {id:r.id, name:r.name, grind:r.grind, opened:r.opened, note:r.note || '', img:r.img, created:+r.created || 0, byName:r.by_name};
+function sbErr(error){
+  const m = (error && error.message) || '';
+  toast(error && (error.code === '42501' || /row-level security|permission/i.test(m)) ? 'Нет прав: войдите как редактор'
+    : error && error.code === '23505' ? 'Такой цвет или эмодзи уже занят другим человеком'
+    : 'Не удалось сохранить: ' + (m || 'нет связи с Supabase'));
+}
+async function sbLoad(t){
+  const {data, error} = await SB.from(t).select('*');
+  if (error){ console.warn('Supabase', t, error); return false; }
+  DB[t] = data.map(r=> fromRow(t, r)).sort(byCreated);
+  redrawService(); return true;
+}
+const sbReloadTimers = {};
+function sbReload(t){ clearTimeout(sbReloadTimers[t]); sbReloadTimers[t] = setTimeout(()=> sbLoad(t), 250); }
+async function sbPut(t, obj){
+  const {error} = await SB.from(t).upsert(toRow(t, obj));
+  if (error){ sbErr(error); sbLoad(t); return false; }
+  return true;
+}
+async function sbDel(t, id){
+  const {error} = await SB.from(t).delete().eq('id', id);
+  if (error){ sbErr(error); sbLoad(t); return false; }
+  return true;
+}
+async function initSupabase(){
+  MODE = 'supabase'; STORE_STATE = 'loading'; AUTH = {ready:false, platformEdit:false, edit:false, local:false, id:null};
+  try{ await loadScript(SB_LIB); SB = window.supabase.createClient(SB_CONFIG.url.trim(), SB_CONFIG.anonKey.trim()); }
+  catch(e){ STORE_STATE = 'sberror'; redrawService(); return; }
+  ASSETS = {
+    upload: async blob => {
+      const path = `${new Date().getFullYear()}/${uid()}.jpg`;
+      const {error} = await SB.storage.from(SB_BUCKET).upload(path, blob, {contentType:'image/jpeg', upsert:false});
+      if (error) throw {code: /size|large/i.test(error.message) ? 'too_large' : 'upstream_error', message: error.message};
+      return {id: path};
+    },
+    delete: async id => { await SB.storage.from(SB_BUCKET).remove([id]); return {deleted:true}; },
+  };
+  const ok = await Promise.all(SB_TABLES.map(sbLoad));
+  STORE_STATE = ok.every(Boolean) ? 'sblive' : 'sberror';
+  SB.channel('wcm230-live').on('postgres_changes', {event:'*', schema:'public'}, payload => { if (SB_TABLES.includes(payload.table)) sbReload(payload.table); }).subscribe();
+  const {data:{session}} = await SB.auth.getSession();
+  await sbApplySession(session);
+  SB.auth.onAuthStateChange((event, sess)=>{
+    // not awaiting Supabase calls inside this callback (supabase-js recommendation)
+    setTimeout(()=>{ sbApplySession(sess); if (event === 'PASSWORD_RECOVERY') openSbNewPw(true); }, 0);
+  });
+}
+async function sbApplySession(session){
+  let prof = null;
+  if (session){ const {data} = await SB.from('profiles').select('*').eq('id', session.user.id).maybeSingle(); prof = data; }
+  LOGIN = session ? {email: session.user.email, name: (prof && prof.name) || session.user.email, role: (prof && prof.role) || 'viewer', uid: session.user.id} : null;
+  AUTH = {ready:true, platformEdit:true, edit: !!LOGIN && (LOGIN.role === 'editor' || LOGIN.role === 'admin'), local:false, id:null};
+  AUTH_LOADED = true;
+  redrawService();
+}
+function drawAuthSb(el){
+  if (!AUTH.ready){ el.textContent = STORE_STATE === 'sberror' ? '⚠️ Нет подключения к Supabase' : 'Подключаюсь к Supabase…'; return; }
+  if (!LOGIN){
+    el.innerHTML = `<span>🔑 Чтобы вносить изменения, войдите по почте и паролю.</span><span class="sp" style="flex:1"></span><button type="button" class="btn red sm" id="loginBtn">Войти</button>`;
+    $('#loginBtn').onclick = openSbLogin; return;
+  }
+  el.innerHTML = `<span>👤 <b class="nm"></b> <span class="byline em"></span> · ${roleName(LOGIN.role)}${AUTH.edit ? ' · ✏️ можно вносить изменения' : ' · 🔒 попросите администратора выдать роль «редактор»'}</span><span class="sp" style="flex:1"></span>${LOGIN.role === 'admin' ? '<button type="button" class="btn line sm" id="accBtn">Пользователи</button>' : ''}<button type="button" class="btn line sm" id="pwBtn">Сменить пароль</button><button type="button" class="btn line sm" id="outBtn">Выйти</button>`;
+  if (!AUTH.edit) el.classList.add('ro');
+  el.querySelector('.nm').textContent = LOGIN.name; el.querySelector('.em').textContent = LOGIN.email;
+  if ($('#accBtn')) $('#accBtn').onclick = openSbUsers;
+  $('#pwBtn').onclick = ()=> openSbNewPw(false);
+  $('#outBtn').onclick = async ()=>{ await SB.auth.signOut(); toast('Вы вышли'); };
+}
+function openSbLogin(){
+  const dlg = $('#dlg');
+  dlg.innerHTML = `<form class="dlg" id="sbl" novalidate><button class="x" type="button" data-close aria-label="Закрыть">✕</button>
+    <h3>Вход</h3><p class="subt">Аккаунт выдаёт администратор. Нет аккаунта — обратитесь к нему.</p>
+    <div class="field"><label for="sbEmail">Почта</label><input class="inp" id="sbEmail" type="email" inputmode="email" autocomplete="username" placeholder="name@example.com"></div>
+    <div class="field"><label for="sbPw">Пароль</label><input class="inp" id="sbPw" type="password" autocomplete="current-password"></div>
+    <div class="msg" id="sbMsg" role="alert"></div>
+    <div class="dfoot"><button type="button" class="btn line sm" id="sbForgot" style="margin-right:auto">Забыли пароль?</button><button type="button" class="btn line sm" data-close>Отмена</button><button type="submit" class="btn red sm" id="sbGo">Войти</button></div></form>`;
+  bindClose(dlg);
+  $('#sbForgot').onclick = async ()=>{
+    const email = emailKey($('#sbEmail').value), msg = $('#sbMsg');
+    if (!validEmail(email)){ msg.textContent = 'Введите почту, на которую прислать ссылку для нового пароля'; return; }
+    const {error} = await SB.auth.resetPasswordForEmail(email, {redirectTo: location.href.split('#')[0]});
+    msg.style.color = error ? '' : '#2f6b3a';
+    msg.textContent = error ? 'Не удалось отправить письмо: ' + error.message : 'Если такой аккаунт есть, на почту придёт ссылка для нового пароля.';
+  };
+  $('#sbl').onsubmit = async ev => {
+    ev.preventDefault(); const msg = $('#sbMsg'); msg.style.color = ''; msg.textContent = '';
+    const email = emailKey($('#sbEmail').value), pw = $('#sbPw').value;
+    if (!validEmail(email)){ msg.textContent = 'Введите почту в формате name@example.com'; return; }
+    const go = $('#sbGo'); go.disabled = true;
+    const {error} = await SB.auth.signInWithPassword({email, password: pw});
+    go.disabled = false;
+    if (error){ msg.textContent = (error.status === 0 || /fetch|network/i.test(error.name + ' ' + error.message)) ? 'Нет связи с Supabase — проверьте интернет и настройки' : /confirm/i.test(error.message) ? 'Почта не подтверждена — попросите администратора подтвердить аккаунт' : /rate|many/i.test(error.message) ? 'Слишком много попыток — подождите немного' : 'Неверная почта или пароль'; return; }
+    dlg.close(); toast('Вы вошли');
+  };
+  dlg.showModal(); setTimeout(()=> $('#sbEmail').focus(), 30);
+}
+function openSbNewPw(recovery){
+  const dlg = $('#dlg'); if (dlg.open) dlg.close();
+  dlg.innerHTML = `<form class="dlg" id="sbp" novalidate><button class="x" type="button" data-close aria-label="Закрыть">✕</button>
+    <h3>${recovery ? 'Задайте новый пароль' : 'Сменить пароль'}</h3><p class="subt">Минимум 8 символов.</p>
+    <div class="field"><label for="sbNew">Новый пароль</label><input class="inp" id="sbNew" type="password" autocomplete="new-password"></div>
+    <div class="field"><label for="sbNew2">Новый пароль ещё раз</label><input class="inp" id="sbNew2" type="password" autocomplete="new-password"></div>
+    <div class="msg" id="sbpMsg" role="alert"></div>
+    <div class="dfoot"><button type="button" class="btn line sm" data-close>Отмена</button><button type="submit" class="btn red sm">Сохранить</button></div></form>`;
+  bindClose(dlg);
+  $('#sbp').onsubmit = async ev => {
+    ev.preventDefault(); const msg = $('#sbpMsg');
+    const pr = pwProblem($('#sbNew').value, $('#sbNew2').value); if (pr){ msg.textContent = pr; return; }
+    const {error} = await SB.auth.updateUser({password: $('#sbNew').value});
+    if (error){ msg.textContent = 'Не удалось сменить пароль: ' + error.message; return; }
+    dlg.close(); toast('Пароль изменён');
+  };
+  dlg.showModal(); setTimeout(()=> $('#sbNew').focus(), 30);
+}
+async function openSbUsers(){
+  if (!LOGIN || LOGIN.role !== 'admin') return;
+  const dlg = $('#dlg');
+  const draw = async () => {
+    const {data, error} = await SB.from('profiles').select('id,email,name,role,created_at').order('created_at');
+    dlg.innerHTML = `<div class="dlg"><button class="x" type="button" data-close aria-label="Закрыть">✕</button>
+      <h3>Пользователи</h3>
+      <p class="subt">Новых людей добавляйте в Supabase: Authentication → Users → Add user → Create new user (почта, пароль, галочка Auto Confirm User). Они появятся здесь с ролью «только просмотр» — выдайте нужную роль.</p>
+      <div id="sbUsers">${error ? `<p class="rob">Не удалось загрузить список: ${esc(error.message)}</p>` : ''}</div>
+      <div class="dfoot"><button type="button" class="btn line sm" data-close>Закрыть</button></div></div>`;
+    bindClose(dlg);
+    const box = $('#sbUsers');
+    (data || []).forEach(u=>{
+      const row = document.createElement('div'); row.className = 'dentry';
+      row.innerHTML = `<span class="who" style="background:var(--blue-2)">${u.role==='admin'?'🛡':u.role==='editor'?'✏️':'👁'}</span>
+        <span class="tx"><input class="inp" data-f="name" style="padding:6px 9px;font-size:14px" aria-label="Имя"><span class="byline"></span></span>
+        <select class="inp" data-f="role" style="width:auto;padding:6px 8px;font-size:13px" aria-label="Роль"><option value="viewer">просмотр</option><option value="editor">редактор</option><option value="admin">админ</option></select>`;
+      row.querySelector('[data-f=name]').value = u.name || '';
+      row.querySelector('.byline').textContent = u.email + (u.id === LOGIN.uid ? ' · это вы' : '');
+      const sel = row.querySelector('[data-f=role]'); sel.value = u.role;
+      if (u.id === LOGIN.uid){ sel.disabled = true; sel.title = 'Свою роль менять нельзя'; }
+      const save = async patch => { const {error:e2} = await SB.from('profiles').update(patch).eq('id', u.id); if (e2){ toast('Не удалось сохранить: ' + e2.message); } else { toast('Сохранено'); if (u.id === LOGIN.uid) sbApplySession((await SB.auth.getSession()).data.session); } };
+      sel.onchange = ()=> save({role: sel.value});
+      row.querySelector('[data-f=name]').onchange = e => save({name: e.target.value.trim()});
+      box.appendChild(row);
+    });
+  };
+  await draw();
+  if (!dlg.open) dlg.showModal();
+}
+
+function writeErr(e){
+  const c = e && e.code;
+  toast(c==='invalid_argument' ? 'Нет прав: изменять тех-обслуживание могут только редакторы с ролью Editor' : c==='quota_exceeded' ? 'Хранилище заполнено — удалите старые задачи' : 'Не удалось сохранить — попробуйте ещё раз');
+}
+async function put(coll, obj){
+  if (MODE === 'supabase') return sbPut(coll, obj);
+  if (!STORE){ localSave(); return true; }
+  const {id, ...body} = obj;
+  try{ await STORE.doc(coll+'/'+id).set(JSON.parse(JSON.stringify(body))); return true; }catch(e){ writeErr(e); return false; }
+}
+async function del(coll, id){
+  if (MODE === 'supabase') return sbDel(coll, id);
+  if (!STORE){ localSave(); return true; }
+  try{ await STORE.doc(coll+'/'+id).delete(); return true; }catch(e){ writeErr(e); return false; }
+}
+const uid = () => Math.random().toString(36).slice(2,9) + Date.now().toString(36).slice(-4);
+const normHex = h => { if(!h) return null; h = h.trim(); if (!h.startsWith('#')) h = '#'+h; if (/^#[0-9a-f]{3}$/i.test(h)) h = '#'+[...h.slice(1)].map(c=>c+c).join(''); return /^#[0-9a-f]{6}$/i.test(h) ? h.toUpperCase() : null; };
+const person = id => DB.people.find(p=>p.id===id);
+const takenColors = except => new Map(DB.people.filter(p=>p.id!==except).map(p=>[normHex(p.color), p]));
+const takenEmojis = except => new Map(DB.people.filter(p=>p.id!==except).map(p=>[p.emoji, p]));
+function freeColor(except){ const t = takenColors(except); return PASTELS.find(c=>!t.has(c)) || randomPastel(t); }
+function randomPastel(t){ for(let i=0;i<200;i++){ const h=Math.floor(Math.random()*360); const c=hslHex(h,70,86); if(!t.has(c)) return c; } return '#EEEEEE'; }
+function hslHex(h,s,l){ s/=100;l/=100; const k=n=>(n+h/30)%12, a=s*Math.min(l,1-l), f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1))); return '#'+[f(0),f(8),f(4)].map(x=>Math.round(x*255).toString(16).padStart(2,'0')).join('').toUpperCase(); }
+function freeEmoji(except){ const t = takenEmojis(except); return EMOJIS.find(e=>!t.has(e)) || null; }
+const pad = n => String(n).padStart(2,'0');
+const dkey = d => `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+const parseKey = k => { const [y,m,d] = k.split('-').map(Number); return new Date(y, m-1, d); };
+const MONTHS = ['январь','февраль','март','апрель','май','июнь','июль','август','сентябрь','октябрь','ноябрь','декабрь'];
+const MONTHS_G = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
+const WD = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'];
+const WDL = ['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'];
+let CAL = (()=>{ const t=new Date(); return {y:t.getFullYear(), m:t.getMonth()}; })();
+
+function renderServiceShell(){
+  return `<section class="service" id="service">
+    <div class="svhead">
+      <h2><i>🛠</i>Тех-обслуживание</h2>
+      <div class="acts"><button class="btn red sm" id="addPerson" hidden>＋ Ответственный</button></div>
+      <div class="svauth" id="svauth">Проверяю права доступа…</div>
+      <p>Нажмите на дату, чтобы назначить обслуживание и ответственного. У каждого человека свой пастельный цвет и эмодзи — нажмите на человека, чтобы их поменять.<br><span class="svstat" id="svstat"></span></p>
+    </div>
+    <div class="svbody">
+      <div class="panelw">
+        <div class="calnav"><button class="ibtn" id="calPrev" aria-label="Предыдущий месяц">‹</button><h3 id="calTitle"></h3><span class="sp"></span><button class="btn line sm" id="calToday">Сегодня</button><button class="ibtn" id="calNext" aria-label="Следующий месяц">›</button></div>
+        <div class="cal" id="cal"></div>
+      </div>
+      <div class="side">
+        <div class="blk"><h4>Ответственные</h4><div class="people" id="people"></div></div>
+        <div class="blk"><h4>Ближайшие задачи</h4><ul class="up" id="upcoming"></ul></div>
+        <div class="blk"><h4>Регламент из инструкции</h4><ul class="reg">
+          <li><b>после молока</b><span>капучинатор — пар 5–10 с и промывка</span></li>
+          <li><b>по заполнению</b><span>поддон для капель</span></li>
+          <li><b>по индикатору</b><span>контейнер для жмыха, заварочный блок</span></li>
+          <li><b>раз в неделю</b><span>кронштейн заварочного блока</span></li>
+          <li><b>~500 кружек</b><span>очистка от накипи</span></li>
+          <li><b>смена зёрен</b><span>быстрая очистка кофемолки</span></li>
+        </ul></div>
+      </div>
+    </div>
+    <div class="coffee">
+      <div class="cfhead"><h3>☕ Кофе</h3><span>фото пачки и степень помола для неё</span><button class="btn red sm" id="addCoffee" hidden>＋ Пачка кофе</button></div>
+      <div class="cfgrid" id="coffees"></div>
+    </div>
+  </section>`;
+}
+function mountService(){
+  if (!$('#service')) return;
+  $('#calPrev').onclick = ()=>{ CAL.m--; if(CAL.m<0){CAL.m=11;CAL.y--;} drawCal(); };
+  $('#calNext').onclick = ()=>{ CAL.m++; if(CAL.m>11){CAL.m=0;CAL.y++;} drawCal(); };
+  $('#calToday').onclick = ()=>{ const t=new Date(); CAL={y:t.getFullYear(),m:t.getMonth()}; drawCal(); };
+  $('#addPerson').onclick = ()=> openPerson(null);
+  $('#addCoffee').onclick = ()=> openCoffee(null);
+  drawService(); setStatus();
+}
+function drawService(){ drawAuth(); drawCal(); drawPeople(); drawUpcoming(); drawCoffees(); }
+function drawCal(){
+  $('#calTitle').textContent = `${MONTHS[CAL.m]} ${CAL.y}`;
+  const first = new Date(CAL.y, CAL.m, 1);
+  const start = new Date(first); start.setDate(1 - ((first.getDay()+6)%7));
+  const today = dkey(new Date());
+  const byDate = {}; DB.events.forEach(e=> (byDate[e.date] ||= []).push(e));
+  let h = WD.map(w=>`<div class="wd">${w}</div>`).join('');
+  for (let i=0;i<42;i++){
+    const d = new Date(start); d.setDate(start.getDate()+i);
+    if (i===35 && d.getMonth()!==CAL.m) break;
+    const k = dkey(d); const ev = byDate[k]||[];
+    const cls = ['d', d.getMonth()!==CAL.m?'out':'', k===today?'today':'', (d.getDay()===0||d.getDay()===6)?'we':''].join(' ');
+    h += `<button class="${cls}" data-k="${k}" aria-label="${d.getDate()} ${MONTHS_G[d.getMonth()]}${ev.length?', задач: '+ev.length:''}"><span class="dn">${d.getDate()}</span>${ev.slice(0,3).map(e=>{const p=person(e.personId)||{color:'#eee',emoji:'❔',name:'?'};return `<span class="pill ${e.done?'done':''}" style="background:${p.color}" title="${esc(p.name)}: ${esc(e.task)}"><span class="e">${p.emoji}</span>${esc(e.task)}</span>`}).join('')}${ev.length>3?`<span class="more">+${ev.length-3}</span>`:''}</button>`;
+  }
+  $('#cal').innerHTML = h;
+  $$('#cal .d').forEach(b=> b.onclick = ()=> openDay(b.dataset.k));
+}
+function drawPeople(){
+  const el = $('#people');
+  if (!DB.people.length){ el.innerHTML = `<span class="empty">Пока никого. Добавьте первого ответственного — кнопкой «＋ Ответственный» или прямо при назначении задачи.</span>`; return; }
+  el.innerHTML = DB.people.map(p=>{ const c = DB.events.filter(e=>e.personId===p.id).length; return `<button class="pchip" data-id="${p.id}" style="background:${p.color}" title="${AUTH.edit?'Изменить цвет и эмодзи':esc(p.name)}"><span class="e">${p.emoji}</span>${esc(p.name)}<span class="c">${c}</span></button>`; }).join('');
+  $$('#people .pchip').forEach(b=> b.onclick = ()=> AUTH.edit ? openPerson(b.dataset.id) : toast('Только просмотр — менять могут редакторы'));
+}
+function drawUpcoming(){
+  const t = dkey(new Date());
+  const list = DB.events.filter(e=>!e.done).sort((a,b)=> a.date.localeCompare(b.date)).slice(0,7);
+  const el = $('#upcoming');
+  if (!list.length){ el.innerHTML = `<li style="cursor:default"><span class="empty">Нет запланированных задач. Нажмите на дату в календаре.</span></li>`; return; }
+  el.innerHTML = list.map(e=>{ const p = person(e.personId)||{color:'#eee',emoji:'❔',name:'?'}; const d = parseKey(e.date); const over = e.date < t; return `<li class="${over?'over':''}" data-k="${e.date}"><span class="dt">${over?'просроч.':''}${over?'<br>':''}${d.getDate()} ${MONTHS_G[d.getMonth()].slice(0,3)}</span><span class="who" style="background:${p.color}">${p.emoji}</span><span><b>${esc(e.task)}</b><small>${esc(p.name)}${e.note?' · '+esc(e.note):''}</small></span></li>`; }).join('');
+  $$('#upcoming li[data-k]').forEach(li=> li.onclick = ()=> openDay(li.dataset.k));
+}
+
+/* --- shared color/emoji picker --- */
+function pickerHTML(prefix, exceptId, color, emoji){
+  const tc = takenColors(exceptId), te = takenEmojis(exceptId);
+  const sw = PASTELS.map(c=>{ const o = tc.get(c); return `<button type="button" class="sw ${normHex(color)===c?'sel':''}" data-c="${c}" style="background:${c}" ${o?`disabled title="Занят: ${esc(o.name)}"`:`title="${c}"`}>${o?o.emoji:''}</button>`; }).join('');
+  const em = EMOJIS.map(e=>{ const o = te.get(e); return `<button type="button" class="em ${emoji===e?'sel':''}" data-e="${e}" ${o?`disabled title="Занят: ${esc(o.name)}"`:''}>${e}</button>`; }).join('');
+  return `<div class="field"><label>Пастельный цвет</label><div class="colors" id="${prefix}Colors">${sw}</div>
+    <div class="hexrow"><span class="pv" id="${prefix}Pv" style="background:${color}"></span><input class="inp" id="${prefix}Hex" value="${color}" maxlength="7" aria-label="HEX-код цвета" placeholder="#AABBCC"><input type="color" id="${prefix}Native" value="${normHex(color)?.toLowerCase()||'#eeeeee'}" aria-label="Выбрать цвет"></div>
+    <div class="msg" id="${prefix}Msg"></div></div>
+    <div class="field"><label>Эмодзи</label><div class="emojis" id="${prefix}Emojis">${em}</div><div class="msg" id="${prefix}EMsg"></div></div>`;
+}
+function bindPicker(prefix, exceptId, state){
+  const setColor = (c, from) => {
+    const n = normHex(c); const msg = $('#'+prefix+'Msg');
+    if (!n){ msg.textContent = 'Введите HEX в формате #AABBCC'; state.colorOk = false; return; }
+    const o = takenColors(exceptId).get(n);
+    if (o){ msg.textContent = `Этот цвет уже у «${o.name}» — выберите другой`; state.colorOk = false; return; }
+    msg.textContent = ''; state.color = n; state.colorOk = true;
+    $('#'+prefix+'Pv').style.background = n;
+    if (from!=='hex') $('#'+prefix+'Hex').value = n;
+    if (from!=='native') $('#'+prefix+'Native').value = n.toLowerCase();
+    $$('#'+prefix+'Colors .sw').forEach(b=> b.classList.toggle('sel', b.dataset.c===n));
+  };
+  $$('#'+prefix+'Colors .sw').forEach(b=> b.onclick = ()=> setColor(b.dataset.c));
+  $('#'+prefix+'Hex').oninput = e => setColor(e.target.value, 'hex');
+  $('#'+prefix+'Native').oninput = e => setColor(e.target.value, 'native');
+  $$('#'+prefix+'Emojis .em').forEach(b=> b.onclick = ()=>{ state.emoji = b.dataset.e; $$('#'+prefix+'Emojis .em').forEach(x=>x.classList.toggle('sel', x===b)); $('#'+prefix+'EMsg').textContent=''; });
+  state.colorOk = !!normHex(state.color) && !takenColors(exceptId).has(normHex(state.color));
+}
+function validName(name, exceptId){
+  if (!name.trim()) return 'Введите имя';
+  if (DB.people.some(p=>p.id!==exceptId && p.name.trim().toLowerCase()===name.trim().toLowerCase())) return 'Такой человек уже есть — выберите его из списка';
+  return '';
+}
+
+/* --- person dialog --- */
+function openPerson(id){
+  if (!AUTH.edit) return;
+  const p = id ? person(id) : null;
+  const st = {color: p ? p.color : freeColor(null), emoji: p ? p.emoji : freeEmoji(null)};
+  const dlg = $('#dlg');
+  dlg.innerHTML = `<form class="dlg" method="dialog" id="pf"><button class="x" type="button" data-close aria-label="Закрыть">✕</button>
+    <h3>${p?'Ответственный':'Новый ответственный'}</h3><p class="subt">${p?'Цвет и эмодзи можно сменить только на свободные — занятые другими отмечены штриховкой.':'Цвет и эмодзи назначены автоматически из свободных — можно поменять.'}</p>
+    <div class="field"><label for="pName">Имя</label><input class="inp" id="pName" value="${esc(p?.name||'')}" placeholder="Например, Аня" autocomplete="off"><div class="msg" id="pNameMsg"></div></div>
+    ${pickerHTML('pp', id, st.color, st.emoji)}
+    <div class="dfoot">${p?`<button type="button" class="btn line sm" id="pDel" style="margin-right:auto;color:var(--red-3)">Удалить</button>`:''}<button type="button" class="btn line sm" data-close>Отмена</button><button type="submit" class="btn red sm">Сохранить</button></div></form>`;
+  bindPicker('pp', id, st);
+  bindClose(dlg);
+  if (p) $('#pDel').onclick = ()=>{
+    const b = $('#pDel'); const evs = DB.events.filter(e=>e.personId===id);
+    if (!b.dataset.arm){ b.dataset.arm = '1'; b.textContent = evs.length ? `Удалить вместе с задачами (${evs.length})?` : 'Точно удалить?'; return; }
+    DB.people = DB.people.filter(x=>x.id!==id); DB.events = DB.events.filter(e=>e.personId!==id);
+    del('people', id); evs.forEach(e=> del('events', e.id));
+    dlg.close(); drawService(); toast('Удалено');
+  };
+  $('#pf').onsubmit = e => {
+    e.preventDefault();
+    const name = $('#pName').value; const nm = validName(name, id);
+    $('#pNameMsg').textContent = nm; if (nm) return;
+    if (!st.colorOk){ $('#ppMsg').textContent ||= 'Выберите свободный цвет'; return; }
+    if (!st.emoji || takenEmojis(id).has(st.emoji)){ $('#ppEMsg').textContent = 'Выберите свободный эмодзи'; return; }
+    let rec;
+    if (p){ rec = {...p, name:name.trim(), color:st.color, emoji:st.emoji}; DB.people = DB.people.map(x=> x.id===id ? rec : x); }
+    else { rec = {id:uid(), name:name.trim(), color:st.color, emoji:st.emoji, created:Date.now()}; DB.people = [...DB.people, rec]; }
+    put('people', rec); dlg.close(); drawService(); toast(p?'Сохранено':'Ответственный добавлен');
+  };
+  dlg.showModal(); setTimeout(()=>$('#pName').focus(), 30);
+}
+function bindClose(dlg){ $$('[data-close]', dlg).forEach(b=> b.onclick = ()=> dlg.close()); }
+
+/* --- day dialog --- */
+function openDay(k){
+  const d = parseKey(k);
+  const dlg = $('#dlg');
+  const st = {color: freeColor(null), emoji: freeEmoji(null)};
+  const draw = () => {
+    const ro = !AUTH.edit;
+    const ev = DB.events.filter(e=>e.date===k);
+    dlg.innerHTML = `<form class="dlg" id="df"><button class="x" type="button" data-close aria-label="Закрыть">✕</button>
+      <h3>${d.getDate()} ${MONTHS_G[d.getMonth()]} ${d.getFullYear()}</h3><p class="subt">${WDL[d.getDay()]}</p>
+      <div id="dEntries">${ev.length? ev.map(e=>{const p=person(e.personId)||{color:'#eee',emoji:'❔',name:'?'};const sid=TASKMAP[e.task];return `<div class="dentry"><span class="who" style="background:${p.color}">${p.emoji}</span><span class="tx"><b>${esc(e.task)}</b>${esc(p.name)}${e.note?' · '+esc(e.note):''}${sid?` · <a href="#s-${sid}" data-close>схема →</a>`:''}<br>${byHTML(e.by, e.byName)}</span>${ro ? (e.done?'<span class="okb">✓ выполнено</span>':'') : `<input type="checkbox" data-done="${e.id}" ${e.done?'checked':''} title="Выполнено" aria-label="Выполнено"><button type="button" class="del" data-del="${e.id}" title="Удалить" aria-label="Удалить">✕</button>`}</div>`}).join('') : `<p class="empty" style="margin:0 0 6px">На эту дату ничего не назначено.</p>`}</div>
+      ${ro ? `<p class="rob">🔒 Только просмотр. Назначать обслуживание могут только редакторы.</p><div class="dfoot"><button type="button" class="btn line sm" data-close>Закрыть</button></div>` : `<h3 style="font-size:15px;margin-top:16px">Назначить обслуживание</h3>
+      <div class="field"><label for="dTask">Что сделать</label><select class="inp" id="dTask">${TASKS.map(([t])=>`<option>${esc(t)}</option>`).join('')}</select></div>
+      <div class="field"><label for="dWho">Ответственный</label><select class="inp" id="dWho">${DB.people.map(p=>`<option value="${p.id}">${p.emoji} ${esc(p.name)}</option>`).join('')}<option value="__new" ${DB.people.length?'':'selected'}>➕ Новый человек…</option></select></div>
+      <div class="newp" id="newBox" ${DB.people.length?'hidden':''}>
+        <div class="field" style="margin-top:0"><label for="nName">Имя нового ответственного</label><input class="inp" id="nName" placeholder="Например, Дима" autocomplete="off"><div class="msg" id="nNameMsg"></div></div>
+        ${pickerHTML('np', null, st.color, st.emoji)}
+      </div>
+      <div class="field"><label for="dNote">Комментарий</label><input class="inp" id="dNote" placeholder="необязательно" autocomplete="off"></div>
+      <div class="dfoot"><button type="button" class="btn line sm" data-close>Закрыть</button><button type="submit" class="btn red sm">Добавить</button></div>`}</form>`;
+    bindClose(dlg); fillNames(dlg);
+    if (ro) return;
+    bindPicker('np', null, st);
+    $('#dWho').onchange = e => { $('#newBox').hidden = e.target.value !== '__new'; };
+    $$('[data-done]', dlg).forEach(c=> c.onchange = ()=>{ const e = DB.events.find(x=>x.id===c.dataset.done); if(e){ const rec = {...e, done:c.checked}; DB.events = DB.events.map(x=> x.id===e.id ? rec : x); put('events', rec); drawService(); } });
+    $$('[data-del]', dlg).forEach(b=> b.onclick = ()=>{ const did = b.dataset.del; DB.events = DB.events.filter(x=>x.id!==did); del('events', did); drawService(); draw(); });
+    $('#df').onsubmit = ev2 => {
+      ev2.preventDefault();
+      let pid = $('#dWho').value;
+      if (pid === '__new'){
+        const name = $('#nName').value; const nm = validName(name, null);
+        $('#nNameMsg').textContent = nm; if (nm) return;
+        if (!st.colorOk){ $('#npMsg').textContent ||= 'Выберите свободный цвет'; return; }
+        if (!st.emoji || takenEmojis(null).has(st.emoji)){ $('#npEMsg').textContent = 'Выберите свободный эмодзи'; return; }
+        pid = uid(); const np = {id:pid, name:name.trim(), color:st.color, emoji:st.emoji, created:Date.now()}; DB.people = [...DB.people, np]; put('people', np);
+        st.color = freeColor(null); st.emoji = freeEmoji(null);
+      }
+      const ne = {id:uid(), date:k, personId:pid, task:$('#dTask').value, note:$('#dNote').value.trim(), done:false, created:Date.now(), by:AUTH.id||null, byName: LOGIN ? LOGIN.name : null};
+      DB.events = [...DB.events, ne]; put('events', ne); drawService(); draw(); toast('Задача добавлена');
+    };
+  };
+  draw();
+  if (!dlg.open) dlg.showModal();
+}
+
+/* ============================================================
+   Router
+   ============================================================ */
+function route(){
+  const h = location.hash.replace(/^#\/?/, '');
+  const parts = h.startsWith('s-') ? ['s', ...h.slice(2).split('-')] : h.split('/');
+  const app = $('#app'); CUR = null;
+  let r = parts[0] || 'danger';
+  if (r === 'danger') app.innerHTML = renderDanger();
+  else if (r === 's') app.innerHTML = renderScenario(parts[1], parts[2]);
+  else { app.innerHTML = renderHome(); r = (r==='service' || r==='coffee') ? r : 'home'; }
+  document.body.classList.toggle('scen', r==='s');
+  $$('.nav a, .tabbar a').forEach(a=> a.classList.toggle('cur', a.dataset.r === (r==='s'?'home':r)));
+  if (r === 's'){
+    const s = SCI[parts[1]];
+    if (s?.special==='errors') mountErrors(); else if (s?.special==='parts') mountParts(); else mountScenario();
+    window.scrollTo(0,0);
+  } else if (r === 'home' || r === 'service' || r === 'coffee'){
+    const hp = $('#heroPanel'); hp.innerHTML = panelSVG(); bindPanelClicks(hp); applyPanel(hp.querySelector('svg'), {lit:'all', hi:['power:tap']});
+    mountService();
+    if (r === 'service') setTimeout(()=> $('#service').scrollIntoView({behavior:'smooth'}), 30);
+    else if (r === 'coffee') setTimeout(()=> $('.coffee').scrollIntoView({behavior:'smooth'}), 30);
+    else window.scrollTo(0,0);
+  } else window.scrollTo(0,0);
+  if ($('#dlg').open) $('#dlg').close();
+}
+/* version switch: auto by screen, the viewer's choice is remembered in this browser */
+const MODE_KEY = 'wcm230-mode';
+function setMode(m, save){
+  document.body.classList.toggle('mob', m === 'mob');
+  $$('.mode button').forEach(b=> { b.classList.toggle('on', b.dataset.m === m); b.setAttribute('aria-pressed', b.dataset.m === m); });
+  if (save){ try{ localStorage.setItem(MODE_KEY, m); }catch(e){} toast(m === 'mob' ? 'Мобильная версия' : 'Версия для компьютера'); }
+}
+(function(){ let m = null; try{ m = localStorage.getItem(MODE_KEY); }catch(e){}
+  if (m !== 'mob' && m !== 'desk') m = (window.matchMedia && matchMedia('(max-width: 760px), (pointer: coarse) and (max-width: 1024px)').matches) ? 'mob' : 'desk';
+  setMode(m, false); })();
+$$('.mode button').forEach(b=> b.onclick = ()=> setMode(b.dataset.m, true));
+window.addEventListener('hashchange', route);
+route();
+initStore().then(initAuth);
+</script>
+</body>
+</html>
